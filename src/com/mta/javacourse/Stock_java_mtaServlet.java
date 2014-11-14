@@ -9,16 +9,26 @@ public class Stock_java_mtaServlet extends HttpServlet {
 			throws IOException {
 		resp.setContentType("text/html");
 		
-		int num1, num2, num3;
+		int angle,hypotenuse,Radius = 50;
+		double base,exp;
 		
-		num1 = 4;
-		num2 = 3;
-		num3 = 7;
+		hypotenuse = 50;
+		angle = 30;
+		base = 20;
+		exp = 13;
 		
-		int result = (num1 + num2) * num3;
+		double area = Math.PI * Radius * Radius;
+		double ridian = angle* Math.PI / 180;
+		double opposite =  Math.sin(ridian) * hypotenuse;
+		double powerCal = Math.pow(base, exp);
 		
-		String resultStr = new String("<h1>Result of ("+num1+"+"+num2+")*"+num3+"="+result+"</h1>");
+		String line1 = new String("calculation 1: Area of circle with radius 50 is "+area+ " square-cm");
+		String line2 = new String("calculation 2: Length of opposite where angle B is 30 degrees and Hypotenuse length is 50 cm is "+opposite+" cm");
+		String line3 = new String("calculation 3: Power of 20 with exp of 13 is "+powerCal);
+		
+		String resultStr = line1 + "<br>" + line2 + "<br>" +line3;
 		
 		resp.getWriter().println(resultStr);
+		
 	}
 }
