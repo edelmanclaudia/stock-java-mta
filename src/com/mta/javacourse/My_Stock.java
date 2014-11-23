@@ -1,11 +1,14 @@
 package com.mta.javacourse;
 
+import java.util.Date;
+
 public class My_Stock {
 	
 	private String StockSymbol;
 	private float Ask;
 	private float Bid;
-	private java.util.Date date;
+	private Date date;
+	
 	
 	public String getStockSymbol (){
 		return StockSymbol;
@@ -19,7 +22,7 @@ public class My_Stock {
 		return Bid;
 	}
 	
-	public java.util.Date getDate (){
+	public Date getDate (){
 		return date;
 	}
 	
@@ -35,12 +38,13 @@ public class My_Stock {
 		Bid = myBid;
 	}
 	
-	public void setDate (java.util.Date myDate){
+	public void setDate (Date myDate){
 		date = myDate;
 	}
 	
 	public String getHtmlDescription(){
-		String stockHtmlDetailsString = "<b> Stock symbol </b>:" +getStockSymbol()+ ",<b> ask </b>: " +getAsk()+ ", <b> bid </b>:" +getBid()+ ",<b> date </b>:" +date.getMonth()+ "/" +date.getDate()+ "/" +date.getYear();
+		String stockHtmlDetailsString = "<b>Stock symbol</b>: " +getStockSymbol()+ ",<b>ask</b>: " +getAsk()+ ",<b>bid</b>: "
+										+getBid()+ ",<b>date</b>: " +date.getDate()+ "/" +date.getMonth()+ "/" +date.getYear();
 		return stockHtmlDetailsString;
 	}
 	

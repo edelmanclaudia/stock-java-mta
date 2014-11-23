@@ -1,6 +1,7 @@
 package com.mta.javacourse;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,7 @@ public class Stock_Details_Servlet extends HttpServlet {
 		My_Stock newStock1 = new My_Stock ();
 		My_Stock newStock2 = new My_Stock ();
 		My_Stock newStock3 = new My_Stock ();
-		java.util.Date newDate = new java.util.Date ();
+		Date newDate = new java.util.Date ();
 		
 		newDate.setMonth(11);
 		newDate.setDate(15);
@@ -35,9 +36,9 @@ public class Stock_Details_Servlet extends HttpServlet {
 
 		resp.setContentType("text/html");
 		
-		resp.getWriter().println(newStock1.getHtmlDescription() + "<br>");
-		resp.getWriter().println(newStock2.getHtmlDescription() + "<br>");
-		resp.getWriter().println(newStock3.getHtmlDescription() + "<br>");
+		resp.getWriter().println(newStock1.getHtmlDescription() + "<br><br>");
+		resp.getWriter().println(newStock2.getHtmlDescription() + "<br><br>");
+		resp.getWriter().println(newStock3.getHtmlDescription() + "<br><br>");
 
 	}
 }
