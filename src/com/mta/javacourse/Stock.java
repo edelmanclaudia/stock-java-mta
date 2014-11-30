@@ -2,7 +2,7 @@ package com.mta.javacourse;
 
 import java.util.Date;
 
-public class My_Stock {
+public class Stock {
 	
 	private String StockSymbol;
 	private float Ask;

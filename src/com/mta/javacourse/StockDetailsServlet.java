@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Stock_Details_Servlet extends HttpServlet {
+public class StockDetailsServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException{
-		My_Stock newStock1 = new My_Stock ();
-		My_Stock newStock2 = new My_Stock ();
-		My_Stock newStock3 = new My_Stock ();
+		Stock newStock1 = new Stock ();
+		Stock newStock2 = new Stock ();
+		Stock newStock3 = new Stock ();
 		Date newDate = new java.util.Date ();
 		
 		newDate.setMonth(11);
