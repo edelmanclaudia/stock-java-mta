@@ -4,14 +4,13 @@ import java.util.Date;
 
 public class Stock {
 	
-	private String StockSymbol;
+	private String stockSymbol;
 	private float ask;
 	private float bid;
 	private Date date;
 	
-	
 	public String getStockSymbol (){
-		return StockSymbol;
+		return stockSymbol;
 	}
 	
 	public float getAsk (){
@@ -26,8 +25,8 @@ public class Stock {
 		return date;
 	}
 	
-	public void setStockSymbol (String mySymbol){
-		StockSymbol = mySymbol;
+	public void setStockSymbol (String symbol){
+		stockSymbol = symbol;
 	}
 	
 	public void setAsk (float newAsk){

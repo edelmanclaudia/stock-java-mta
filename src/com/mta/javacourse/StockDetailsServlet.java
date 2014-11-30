@@ -10,35 +10,35 @@ import javax.servlet.http.HttpServletResponse;
 public class StockDetailsServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException{
-		Stock newStock1 = new Stock ();
-		Stock newStock2 = new Stock ();
-		Stock newStock3 = new Stock ();
-		Date newDate = new java.util.Date ();
+		Stock stock1 = new Stock ();
+		Stock stock2 = new Stock ();
+		Stock stock3 = new Stock ();
+		Date date = new java.util.Date ();
 		
-		newDate.setMonth(11);
-		newDate.setDate(15);
-		newDate.setYear(2014);
+		date.setMonth(11);
+		date.setDate(15);
+		date.setYear(2014);
 		
-		newStock1.setStockSymbol("PIH");
-		newStock1.setAsk(12.4f);
-		newStock1.setBid(13.1f);
-		newStock1.setDate(newDate);
+		stock1.setStockSymbol("PIH");
+		stock1.setAsk(12.4f);
+		stock1.setBid(13.1f);
+		stock1.setDate(date);
 		
-		newStock2.setStockSymbol("AAL");
-		newStock2.setAsk(5.5f);
-		newStock2.setBid(5.78f);
-		newStock2.setDate(newDate);
+		stock2.setStockSymbol("AAL");
+		stock2.setAsk(5.5f);
+		stock2.setBid(5.78f);
+		stock2.setDate(date);
 		
-		newStock3.setStockSymbol("CAAS");
-		newStock3.setAsk(31.5f);
-		newStock3.setBid(31.2f);
-		newStock3.setDate(newDate);
+		stock3.setStockSymbol("CAAS");
+		stock3.setAsk(31.5f);
+		stock3.setBid(31.2f);
+		stock3.setDate(date);
 
 		resp.setContentType("text/html");
 		
-		resp.getWriter().println(newStock1.getHtmlDescription() + "<br><br>");
-		resp.getWriter().println(newStock2.getHtmlDescription() + "<br><br>");
-		resp.getWriter().println(newStock3.getHtmlDescription() + "<br><br>");
+		resp.getWriter().println(stock1.getHtmlDescription() + "<br><br>");
+		resp.getWriter().println(stock2.getHtmlDescription() + "<br><br>");
+		resp.getWriter().println(stock3.getHtmlDescription() + "<br><br>");
 
 	}
 }
