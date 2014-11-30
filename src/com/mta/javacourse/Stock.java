@@ -5,8 +5,8 @@ import java.util.Date;
 public class Stock {
 	
 	private String StockSymbol;
-	private float Ask;
-	private float Bid;
+	private float ask;
+	private float bid;
 	private Date date;
 	
 	
@@ -15,11 +15,11 @@ public class Stock {
 	}
 	
 	public float getAsk (){
-		return Ask;
+		return ask;
 	}
 	
 	public float getBid (){
-		return Bid;
+		return bid;
 	}
 	
 	public Date getDate (){
@@ -30,16 +30,16 @@ public class Stock {
 		StockSymbol = mySymbol;
 	}
 	
-	public void setAsk (float myAsk){
-		Ask = myAsk;
+	public void setAsk (float newAsk){
+		ask = newAsk;
 	}
 	
-	public void setBid (float myBid){
-		Bid = myBid;
+	public void setBid (float newBid){
+		bid = newBid;
 	}
 	
-	public void setDate (Date myDate){
-		date = myDate;
+	public void setDate (Date newDate){
+		date = newDate;
 	}
 	
 	public String getHtmlDescription(){

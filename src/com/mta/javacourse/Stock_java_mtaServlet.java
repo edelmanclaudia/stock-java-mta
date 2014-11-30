@@ -22,9 +22,9 @@ public class Stock_java_mtaServlet extends HttpServlet {
 		double opposite =  Math.sin(ridian) * hypotenuse;
 		double powerCal = Math.pow(base, exp);
 		
-		String line1 = new String("calculation 1: Area of circle with radius 50 is "+area+ " square-cm");
-		String line2 = new String("calculation 2: Length of opposite where angle B is 30 degrees and Hypotenuse length is 50 cm is "+opposite+" cm");
-		String line3 = new String("calculation 3: Power of 20 with exp of 13 is "+powerCal);
+		String line1 = new String("calculation 1: Area of circle with radius " +hypotenuse+ " is "+area+ " square-cm");
+		String line2 = new String("calculation 2: Length of opposite where angle B is " +exp+ " degrees and Hypotenuse length is 50 cm is "+opposite+" cm");
+		String line3 = new String("calculation 3: Power of " +base+ " with exp of " +angle+ " is "+powerCal);
 		
 		String resultStr = line1 + "<br>" + line2 + "<br>" +line3;
 		
