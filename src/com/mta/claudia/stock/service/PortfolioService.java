@@ -5,14 +5,28 @@ import java.util.Date;
 import com.mta.claudia.stock.model.Portfolio;
 import com.mta.claudia.stock.model.Stock;
 
+/**
+* An instance of this class represents a portfoilio service.
+* @author Claudia Edelman
+* @since 2014
+* date 2/12/2014
+*/
+
 public class PortfolioService {
 	
 	private Portfolio myPortfolio;
 	
 	public PortfolioService(){
 		myPortfolio = new Portfolio();
-
 	}
+	
+	/**
+	* Returns a portfolio.
+	* 
+	*
+	* @param set values to the stocks variables by using stock class 
+	* * @return myportfolio with an array of stocks.
+	*/
 	
 	public Portfolio getPortfolio(){
 		

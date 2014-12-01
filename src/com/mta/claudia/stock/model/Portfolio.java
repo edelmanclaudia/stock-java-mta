@@ -3,6 +3,13 @@ package com.mta.claudia.stock.model;
 import java.util.Date;
 import java.util.Date;
 
+/**
+* An instance of this class represents a portfoilio of stocks.
+* @author Claudia Edelman
+* @since 2014
+* date 2/12/2014
+*/
+
 public class Portfolio {
 	private final static int MAX_PORTFOLIO_SIZE = 5;
 
@@ -17,18 +24,55 @@ public class Portfolio {
 		stocksStatus = new StockStatus[MAX_PORTFOLIO_SIZE];
 	}
 	
+	/**
+	* Adds stock to the stocks arrays the sum.
+	* a limitation of num of stocks of max.
+	*
+	* @param stock the addStock to add to this stock to the array.
+	* portfolioSize count the num of stocks in the array.
+	*/
+	
 	public void addStock(Stock stock){
 		if(portfolioSize < MAX_PORTFOLIO_SIZE)
 		{
 			stocks[portfolioSize] = stock;
 			portfolioSize++;
 		}
-
 	}
+	
+	/**
+	* Returns the stocks array of this portfoilio.
+	*
+	* @return the stocks of this portfolio.
+	*/
 	
 	public Stock[] getStocks() {
 		return stocks;
 	}
+	
+	/**
+	* Returns the description portfolio.
+	* 
+	*
+	* @param runs on the stocks array and print the stock description
+	* * @return the getHtmlString.
+	*/
+	
+	public String getHtmlString(){
+		String getHtmlString = " <h1>Portfolio: </h1> ";
+		
+		for(int i = 0; i < portfolioSize; i++)
+			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() +"<br><br>";
+
+		return getHtmlString;
+	}
+	
+	/**
+	* An instance of this class represents the stock status.
+	* @author Claudia Edelman
+	* @since 2014
+	* date 2/12/2014
+	*/
 	
 	public class StockStatus {
 		public final static int DO_NOTHING = 0;
@@ -41,16 +85,5 @@ public class Portfolio {
 		private int recommendation;
 		private int stockQuantity;
 		
-	}
-	
-	public int i = 0;
-
-	public String getHtmlPortfolioDescription(){
-		String getHtmlPortfolioDescription = " <h1>Portfolio: </h1> ";
-		
-		for(i = 0; i < portfolioSize; i++)
-			getHtmlPortfolioDescription += "<b>Stock</b> " +(i+1)+ ": " +stocks[i].getHtmlDescription() +"<br><br>";
-
-		return getHtmlPortfolioDescription;
 	}
 }
