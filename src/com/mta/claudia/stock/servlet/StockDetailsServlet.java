@@ -1,4 +1,4 @@
-package com.mta.javacourse;
+package com.mta.claudia.stock.servlet;
 
 import java.io.IOException;
 import java.util.Date;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mta.javacourse.model.Stock;
+import com.mta.claudia.stock.model.Stock;
 
 public class StockDetailsServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)

@@ -1,4 +1,4 @@
-package com.mta.javacourse.model;
+package com.mta.claudia.stock.model;
 
 import java.util.Date;
 

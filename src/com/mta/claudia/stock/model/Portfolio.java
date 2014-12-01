@@ -1,4 +1,4 @@
-package com.mta.javacourse.model;
+package com.mta.claudia.stock.model;
 
 import java.util.Date;
 import java.util.Date;
@@ -6,11 +6,15 @@ import java.util.Date;
 public class Portfolio {
 	private final static int MAX_PORTFOLIO_SIZE = 5;
 
+	private String title;
 	private Stock[] stocks;
+	private StockStatus[] stocksStatus;
 	private int portfolioSize = 0; 
+	
 	
 	public Portfolio(){
 		stocks = new Stock[MAX_PORTFOLIO_SIZE];
+		stocksStatus = new StockStatus[MAX_PORTFOLIO_SIZE];
 	}
 	
 	public void addStock(Stock stock){
@@ -36,8 +40,7 @@ public class Portfolio {
 		private Date date;
 		private int recommendation;
 		private int stockQuantity;
-		private StockStatus[] stocksStatus;
-	
+		
 	}
 	
 	public int i = 0;

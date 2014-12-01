@@ -1,9 +1,9 @@
-package com.mta.javacourse.service;
+package com.mta.claudia.stock.service;
 
 import java.util.Date;
 
-import com.mta.javacourse.model.Portfolio;
-import com.mta.javacourse.model.Stock;
+import com.mta.claudia.stock.model.Portfolio;
+import com.mta.claudia.stock.model.Stock;
 
 public class PortfolioService {
 	

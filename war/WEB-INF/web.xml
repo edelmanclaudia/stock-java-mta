@@ -7,7 +7,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
 	<servlet>
 		<servlet-name>Stock_java_mta</servlet-name>
-		<servlet-class>com.mta.javacourse.Stock_java_mtaServlet</servlet-class>
+		<servlet-class>com.mta.claudia.stock.servlet.Stock_java_mtaServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Stock_java_mta</servlet-name>
@@ -16,7 +16,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	
 	<servlet>
 		<servlet-name>StockDetailsServlet</servlet-name>
-		<servlet-class>com.mta.javacourse.StockDetailsServlet</servlet-class>
+		<servlet-class>com.mta.claudia.stock.servlet.StockDetailsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>StockDetailsServlet</servlet-name>
@@ -25,7 +25,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	
 	<servlet>
 		<servlet-name>PortfolioServlet</servlet-name>
-		<servlet-class>com.mta.javacourse.servlet.PortfolioServlet</servlet-class>
+		<servlet-class>com.mta.claudia.stock.servlet.PortfolioServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PortfolioServlet</servlet-name>
