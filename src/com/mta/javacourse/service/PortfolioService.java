@@ -2,8 +2,8 @@ package com.mta.javacourse.service;
 
 import java.util.Date;
 
-import com.mta.javacourse.Stock;
 import com.mta.javacourse.model.Portfolio;
+import com.mta.javacourse.model.Stock;
 
 public class PortfolioService {
 	
