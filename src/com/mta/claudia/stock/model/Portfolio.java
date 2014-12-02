@@ -18,7 +18,14 @@ public class Portfolio {
 	private StockStatus[] stocksStatus;
 	private int portfolioSize = 0; 
 	
-	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public Portfolio(){
 		stocks = new Stock[MAX_PORTFOLIO_SIZE];
 		stocksStatus = new StockStatus[MAX_PORTFOLIO_SIZE];
@@ -85,5 +92,54 @@ public class Portfolio {
 		private int recommendation;
 		private int stockQuantity;
 		
+		//getters : 
+		public String getSymbol() {
+			return symbol;
+		}
+		
+		public float getCurrentBid() {
+			return currentBid;
+		}
+		
+		public float getCurrentAsk() {
+			return currentAsk;
+		}
+		
+		public Date getDate() {
+			return date;
+		}
+		
+		public int getRecommendation() {
+			return recommendation;
+		}
+		
+		public int getStockQuantity() {
+			return stockQuantity;
+		}
+		
+		//setters:
+		public void setSymbol(String symbol) {
+			this.symbol = symbol;
+		}
+	
+		public void setCurrentBid(float currentBid) {
+			this.currentBid = currentBid;
+		}
+		
+		public void setCurrentAsk(float currentAsk) {
+			this.currentAsk = currentAsk;
+		}
+		
+		public void setDate(Date date) {
+			this.date = date;
+		}
+		
+		public void setRecommendation(int recommendation) {
+			this.recommendation = recommendation;
+		}
+		
+		public void setStockQuantity(int stockQuantity) {
+			this.stockQuantity = stockQuantity;
+		}		
 	}
 }
