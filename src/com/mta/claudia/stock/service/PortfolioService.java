@@ -14,12 +14,6 @@ import com.mta.claudia.stock.model.Stock;
 
 public class PortfolioService {
 	
-	private Portfolio myPortfolio;
-	
-	public PortfolioService(){
-		myPortfolio = new Portfolio();
-	}
-	
 	/**
 	* Returns a portfolio.
 	* 
@@ -30,6 +24,7 @@ public class PortfolioService {
 	
 	public Portfolio getPortfolio(){
 		
+		Portfolio myPortfolio = new Portfolio();
 		Stock stock1 = new Stock ();
 		Stock stock2 = new Stock ();
 		Stock stock3 = new Stock ();
