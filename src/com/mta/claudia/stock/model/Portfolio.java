@@ -3,6 +3,9 @@ package com.mta.claudia.stock.model;
 import java.util.Date;
 import java.util.Date;
 
+import com.google.appengine.api.socket.SocketServicePb.SetSocketOptionsReply;
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
+
 /**
 * An instance of this class represents a portfoilio of stocks.
 * @author Claudia Edelman
@@ -18,19 +21,54 @@ public class Portfolio {
 	private StockStatus[] stocksStatus;
 	private int portfolioSize = 0; 
 	
+	
+
 	public String getTitle() {
 		return title;
+	}
+	
+	public int getPortfolioSize(){
+		return portfolioSize = 0;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-	public Portfolio(){
-		stocks = new Stock[MAX_PORTFOLIO_SIZE];
-		stocksStatus = new StockStatus[MAX_PORTFOLIO_SIZE];
+	
+	public void setStocks(Stock[] stocks) {
+		this.stocks = stocks;
 	}
 	
+	public void setPortfolioSize(int portfolioSize) {
+		this.portfolioSize = portfolioSize;
+	}
+	public Portfolio(){
+		stocks = new Stock[MAX_PORTFOLIO_SIZE];
+		setStocksStatus(new StockStatus[MAX_PORTFOLIO_SIZE]);
+	}
+	
+	/**
+	* copy constructor
+	* @param portfolio
+	*/
+	
+	public Portfolio(Portfolio portfolio){
+		portfolio.getTitle();
+		portfolio.getPortfolioSize();
+		
+		for(int i = 0; i < MAX_PORTFOLIO_SIZE ; i++){
+			stocks[i] = portfolio.getStocks()[i];
+			stocksStatus[i] = portfolio.getStocksStatus()[i];
+		}
+	}
+	
+	public Portfolio(String title1,Stock[] stocks1,StockStatus[] stockStatus1,int portfolioSize1){
+		setTitle(title1);
+		setStocks(stocks1);
+		setStocksStatus(stockStatus1);
+		setPortfolioSize(portfolioSize1);
+	}
+		
 	/**
 	* Adds stock to the stocks arrays the sum.
 	* a limitation of num of stocks of max.
@@ -74,6 +112,14 @@ public class Portfolio {
 		return getHtmlString;
 	}
 	
+	public StockStatus[] getStocksStatus() {
+		return stocksStatus;
+	}
+
+	public void setStocksStatus(StockStatus[] stocksStatus) {
+		this.stocksStatus = stocksStatus;
+	}
+
 	/**
 	* An instance of this class represents the stock status.
 	* @author Claudia Edelman
@@ -91,6 +137,16 @@ public class Portfolio {
 		private Date date;
 		private int recommendation;
 		private int stockQuantity;
+		
+		public StockStatus(StockStatus stockStatus){
+			//this(stockStatus.getSymbol(),stockStatus.getCurrentBid(),stockStatus.getCurrentAsk(),stockStatus.getDate(),stockStatus.getRecommendation(),stockStatus.getStockQuantity());
+			symbol = stockStatus.symbol;
+			currentAsk = stockStatus.currentAsk;
+			currentAsk = stockStatus.currentBid;
+			date = stockStatus.date;
+			recommendation = stockStatus.recommendation;
+			stockQuantity = stockStatus.stockQuantity;
+		}
 		
 		//getters : 
 		public String getSymbol() {

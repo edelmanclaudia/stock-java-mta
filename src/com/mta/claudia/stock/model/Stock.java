@@ -16,6 +16,23 @@ public class Stock {
 	private float bid;
 	private Date date;
 	
+	/**
+	* copy constructor
+	* @param stocks
+	*/
+	
+	public Stock(Stock stock){
+		this(stock.getStockSymbol(),stock.getAsk(),stock.getBid(),stock.getDate());
+	}
+	
+	
+	public Stock(String stockSymbol1, float ask1, float bid1, Date date1) {
+		setStockSymbol(stockSymbol1);
+		setAsk(ask1);
+		setBid(bid1);
+		setDate(date1);
+	}
+	
 	//getters:
 	
 	public String getStockSymbol (){
