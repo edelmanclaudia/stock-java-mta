@@ -53,19 +53,23 @@ public class Portfolio {
 	*/
 	
 	public Portfolio(Portfolio portfolio){
-		portfolio.getTitle();
-		portfolio.getPortfolioSize();
+		this();
+		this.title = portfolio.getTitle();
+		this.portfolioSize = portfolio.portfolioSize;
 		
-		for(int i = 0; i < MAX_PORTFOLIO_SIZE ; i++){
-			stocks[i] = portfolio.getStocks()[i];
-			stocksStatus[i] = portfolio.getStocksStatus()[i];
+		for(int i = 0; i < portfolio.portfolioSize ; i++){
+			stocks[i] = new Stock(portfolio.getStocks()[i]);
+			stocksStatus[i] = new StockStatus(portfolio.getStocksStatus()[i]);
 		}
 	}
 	
 	public Portfolio(String title1,Stock[] stocks1,StockStatus[] stockStatus1,int portfolioSize1){
 		setTitle(title1);
 		setStocks(stocks1);
-		setStocksStatus(stockStatus1);
+		if(stockStatus1 != null)
+		{
+			setStocksStatus(stockStatus1);
+		}
 		setPortfolioSize(portfolioSize1);
 	}
 		
@@ -85,6 +89,18 @@ public class Portfolio {
 		}
 	}
 	
+	public void removeStock(int index){
+		if(index == portfolioSize)
+			this.portfolioSize--;
+		else 
+		{
+			this.portfolioSize--;
+			for(int i = index; i <= portfolioSize-1; i++)
+			{
+				this.stocks[i] = this.stocks[i+1];
+			}
+		}
+	}
 	/**
 	* Returns the stocks array of this portfoilio.
 	*
@@ -104,7 +120,7 @@ public class Portfolio {
 	*/
 	
 	public String getHtmlString(){
-		String getHtmlString = " <h1>Portfolio:</h1> " +getTitle();
+		String getHtmlString = getTitle() + "<br>";
 		
 		for(int i = 0; i < portfolioSize; i++)
 			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() +"<br><br>";
@@ -137,15 +153,22 @@ public class Portfolio {
 		private Date date;
 		private int recommendation;
 		private int stockQuantity;
-		
+
+		public StockStatus(){
+			
+		}
+			
 		public StockStatus(StockStatus stockStatus){
 			//this(stockStatus.getSymbol(),stockStatus.getCurrentBid(),stockStatus.getCurrentAsk(),stockStatus.getDate(),stockStatus.getRecommendation(),stockStatus.getStockQuantity());
-			symbol = stockStatus.symbol;
-			currentAsk = stockStatus.currentAsk;
-			currentAsk = stockStatus.currentBid;
-			date = stockStatus.date;
-			recommendation = stockStatus.recommendation;
-			stockQuantity = stockStatus.stockQuantity;
+			if(this.symbol != null)
+			{
+				this.symbol = stockStatus.symbol;
+				this.currentAsk = stockStatus.currentAsk;
+				this.currentAsk = stockStatus.currentBid;
+				this.date = stockStatus.date;
+				this.recommendation = stockStatus.recommendation;
+				this.stockQuantity = stockStatus.stockQuantity;
+			}
 		}
 		
 		//getters : 

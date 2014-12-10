@@ -18,7 +18,7 @@ public class Stock {
 	
 	/**
 	* copy constructor
-	* @param stocks 1
+	* @param stocks 
 	*/
 	
 	public Stock(Stock stock){
