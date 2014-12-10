@@ -63,13 +63,15 @@ public class Portfolio {
 		}
 	}
 	
+	/**
+	* constructor
+	* @param portfolio
+	*/
+	
 	public Portfolio(String title1,Stock[] stocks1,StockStatus[] stockStatus1,int portfolioSize1){
 		setTitle(title1);
 		setStocks(stocks1);
-		if(stockStatus1 != null)
-		{
-			setStocksStatus(stockStatus1);
-		}
+		setStocksStatus(stockStatus1);
 		setPortfolioSize(portfolioSize1);
 	}
 		
@@ -88,6 +90,14 @@ public class Portfolio {
 			portfolioSize++;
 		}
 	}
+	
+	/**
+	* Remove stock to from stocks array.
+	* reduce the portfolio size.
+	*
+	* @param stock the removeStock from this stocks array.
+	* delete the stock by the index place and moves the other stock to the left 
+	*/
 	
 	public void removeStock(int index){
 		if(index == portfolioSize)
@@ -154,9 +164,19 @@ public class Portfolio {
 		private int recommendation;
 		private int stockQuantity;
 
+		/**
+		* copy constructor
+		* @param StockStatus
+		*/
+		
 		public StockStatus(){
 			
 		}
+		
+		/**
+		* constructor
+		* @param StockStatus
+		*/
 			
 		public StockStatus(StockStatus stockStatus){
 			//this(stockStatus.getSymbol(),stockStatus.getCurrentBid(),stockStatus.getCurrentAsk(),stockStatus.getDate(),stockStatus.getRecommendation(),stockStatus.getStockQuantity());
