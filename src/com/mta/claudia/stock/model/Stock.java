@@ -25,7 +25,6 @@ public class Stock {
 		this(stock.getStockSymbol(),stock.getAsk(),stock.getBid(),stock.getDate());
 	}
 	
-	
 	public Stock(String stockSymbol1, float ask1, float bid1, Date date1) {
 		setStockSymbol(stockSymbol1);
 		setAsk(ask1);

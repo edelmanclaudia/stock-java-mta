@@ -22,7 +22,6 @@ public class Portfolio {
 	private int portfolioSize = 0; 
 	
 	
-
 	public String getTitle() {
 		return title;
 	}
@@ -42,6 +41,7 @@ public class Portfolio {
 	public void setPortfolioSize(int portfolioSize) {
 		this.portfolioSize = portfolioSize;
 	}
+	
 	public Portfolio(){
 		stocks = new Stock[MAX_PORTFOLIO_SIZE];
 		setStocksStatus(new StockStatus[MAX_PORTFOLIO_SIZE]);
@@ -104,7 +104,7 @@ public class Portfolio {
 	*/
 	
 	public String getHtmlString(){
-		String getHtmlString = " <h1>Portfolio: </h1> ";
+		String getHtmlString = " <h1>Portfolio:</h1> " +getTitle();
 		
 		for(int i = 0; i < portfolioSize; i++)
 			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() +"<br><br>";

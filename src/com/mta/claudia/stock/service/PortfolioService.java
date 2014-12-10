@@ -34,7 +34,6 @@ public class PortfolioService {
 		Stock stock1 = new Stock ("PIH", 12.4f, 13.1f, date);
 		Stock stock2 = new Stock ("AAL",5.5f,5.78f,date);
 		Stock stock3 = new Stock ("CAAS",31.5f,31.2f,date);
-		
 		//stock1.setStockSymbol("PIH");
 		//stock1.setAsk(12.4f);
 		//stock1.setBid(13.1f);
@@ -53,6 +52,8 @@ public class PortfolioService {
 		//stock3.setDate(date);
 		myPortfolio.addStock(stock3);
 		
+		myPortfolio.setTitle("p1");
+
 		return myPortfolio;
 	}
 }
