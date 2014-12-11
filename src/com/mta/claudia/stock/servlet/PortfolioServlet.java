@@ -33,13 +33,13 @@ public class PortfolioServlet extends HttpServlet {
 		resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
 		
 		portfolio.removeStock(0);
-		resp.getWriter().println("<h1>After Remove Stock: <h1>");
+		resp.getWriter().println("<h1><font color=darkblue> After Remove Stock: </font><h1>");
 		resp.getWriter().println("-----------------------------------------------------");
 		resp.getWriter().println(portfolio.getHtmlString() + "<br>");
 		resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
 		
 		portfolio2.getStocks()[2].setBid(55.55f);
-		resp.getWriter().println("<h1>After Change of Stock Bid: <h1>");
+		resp.getWriter().println("<h1><font color=darkblue> After Change of Stock Bid: </font><h1>");
 		resp.getWriter().println("-----------------------------------------------------");
 		resp.getWriter().println(portfolio.getHtmlString() + "<br>");
 		resp.getWriter().println(portfolio2.getHtmlString() + "<br>");

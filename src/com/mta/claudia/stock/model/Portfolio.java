@@ -21,7 +21,7 @@ public class Portfolio {
 	private StockStatus[] stocksStatus;
 	private int portfolioSize = 0; 
 	
-	
+	//getters
 	public String getTitle() {
 		return title;
 	}
@@ -30,6 +30,15 @@ public class Portfolio {
 		return portfolioSize = 0;
 	}
 
+	public Stock[] getStocks() {
+		return stocks;
+	}
+		
+	public StockStatus[] getStocksStatus() {
+		return stocksStatus;
+	}
+	
+	//setters
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -41,6 +50,15 @@ public class Portfolio {
 	public void setPortfolioSize(int portfolioSize) {
 		this.portfolioSize = portfolioSize;
 	}
+
+	public void setStocksStatus(StockStatus[] stocksStatus) {
+		this.stocksStatus = stocksStatus;
+	}
+	
+	/**
+	* constructor
+	* @param portfolio allocates instances
+	*/
 	
 	public Portfolio(){
 		stocks = new Stock[MAX_PORTFOLIO_SIZE];
@@ -110,16 +128,7 @@ public class Portfolio {
 				this.stocks[i] = this.stocks[i+1];
 			}
 		}
-	}
-	/**
-	* Returns the stocks array of this portfoilio.
-	*
-	* @return the stocks of this portfolio.
-	*/
-	
-	public Stock[] getStocks() {
-		return stocks;
-	}
+	}	
 	
 	/**
 	* Returns the description portfolio.
@@ -136,14 +145,6 @@ public class Portfolio {
 			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() +"<br><br>";
 
 		return getHtmlString;
-	}
-	
-	public StockStatus[] getStocksStatus() {
-		return stocksStatus;
-	}
-
-	public void setStocksStatus(StockStatus[] stocksStatus) {
-		this.stocksStatus = stocksStatus;
 	}
 
 	/**
@@ -179,7 +180,6 @@ public class Portfolio {
 		*/
 			
 		public StockStatus(StockStatus stockStatus){
-			//this(stockStatus.getSymbol(),stockStatus.getCurrentBid(),stockStatus.getCurrentAsk(),stockStatus.getDate(),stockStatus.getRecommendation(),stockStatus.getStockQuantity());
 			if(this.symbol != null)
 			{
 				this.symbol = stockStatus.symbol;
