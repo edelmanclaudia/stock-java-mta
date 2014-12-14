@@ -30,13 +30,13 @@ public class Stock {
 	* @param stocks 
 	*/
 	
-	public Stock(String stockSymbol1, float ask1, float bid1, Date date1) {
-		if(stockSymbol1 != null)
+	public Stock(String stockSymbol, float ask, float bid, Date date) {
+		if(stockSymbol != null)
 		{
-			setStockSymbol(stockSymbol1);
-			setAsk(ask1);
-			setBid(bid1);
-			setDate(date1);
+			setStockSymbol(stockSymbol);
+			setAsk(ask);
+			setBid(bid);
+			setDate(date);
 		}
 		//else
 			//System.out.print

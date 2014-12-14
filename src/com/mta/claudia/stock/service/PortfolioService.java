@@ -29,18 +29,22 @@ public class PortfolioService {
 		Portfolio myPortfolio = new Portfolio();
 		Date date = new java.util.Date ();
 		
-		date.setMonth(11);
+		myPortfolio.setBalance(10000);
+		
+		date.setMonth(12);
 		date.setDate(15);
 		date.setYear(2014);
 		
-		Stock stock1 = new Stock ("PIH", 12.4f, 13.1f, date);
-		Stock stock2 = new Stock ("AAL",5.5f,5.78f,date);
-		Stock stock3 = new Stock ("CAAS",31.5f,31.2f,date);
+		Stock stock1 = new Stock ("PIH",10, 8.5f, date);
+		Stock stock2 = new Stock ("AAL",30,25.5f,date);
+		Stock stock3 = new Stock ("CAAS",20,15.5f,date);
 	
-
-		myPortfolio.addStock(stock1);
-		myPortfolio.addStock(stock2);
-		myPortfolio.addStock(stock3);
+		myPortfolio.addStock(stock1,20);
+		myPortfolio.addStock(stock2,30);
+		myPortfolio.addStock(stock3,40);
+				
+		myPortfolio.sellStock("AAL", -1);
+		myPortfolio.removeStock("CAAS");
 		
 		myPortfolio.setTitle("<h1>Portfolio 1#</h1>");
 		

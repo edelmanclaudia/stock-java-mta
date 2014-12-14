@@ -16,7 +16,7 @@ public class Portfolio {
 	private Stock[] stocks;
 	private StockStatus[] stocksStatus;
 	private int portfolioSize = 0; 
-	private float balance;
+	private float balance = 0;
 	
 	//getters
 	public String getTitle() {
@@ -97,23 +97,13 @@ public class Portfolio {
 	* @param portfolio
 	*/
 	
-	public Portfolio(String title1,Stock[] stocks1,StockStatus[] stockStatus1,int portfolioSize1,float balance1){
-		setTitle(title1);
-		setStocks(stocks1);
-		setStocksStatus(stockStatus1);
-		setPortfolioSize(portfolioSize1);
-		setBalance(balance1);
+	public Portfolio(String title,Stock[] stocks,StockStatus[] stockStatus,int portfolioSize,float balance){
+		setTitle(title);
+		setStocks(stocks);
+		setStocksStatus(stockStatus);
+		setPortfolioSize(portfolioSize);
+		setBalance(balance);
 	}
-	
-	//public void updateStockStatus(Stock stock,StockStatus stockStatus){
-	//	stockStatus.setCurrentAsk(stock.getAsk());
-	//	stockStatus.setCurrentBid(stock.getBid());
-	//	stockStatus.setDate(stock.getDate());
-	//	stockStatus.setStockQuantity(0);
-	//	stockStatus.setSymbol(stock.getStockSymbol());
-		//stockStatus.setRecommendation(ALGO_RECOMMENDATION.DO_NOTHING);
-	//}
-	
 		
 	/**
 	* Adds stock to the stocks arrays the sum.
@@ -121,14 +111,14 @@ public class Portfolio {
 	*
 	* @param stock the addStock to add to this stock to the array.
 	* portfolioSize count the num of stocks in the array.
+	* 
 	*/
 	
-	public void addStock(Stock stock){
+	public void addStock(Stock stock,int quantity){
 		if(portfolioSize < MAX_PORTFOLIO_SIZE)
 		{
 			stocks[portfolioSize] = stock;
-			//updateStockStatus(stock,stockStatus);
-			stocksStatus[portfolioSize] = new StockStatus(stock.getStockSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING, 0);
+			stocksStatus[portfolioSize] = new StockStatus(stock.getStockSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING, quantity);
 			portfolioSize++;
 		}
 		else
@@ -144,44 +134,119 @@ public class Portfolio {
 	* @param stock the removeStock from this stocks array.
 	* delete the stock by the index place and moves the other stock to the left 
 	*/
-	/*
-	public boolean removeStock(int index){
-		this.stocks[index] = null;
-
-		if(index == portfolioSize)
-			this.portfolioSize--;
-		else 
+	
+	public boolean removeStock(String stockSymbol){
+		for(int index = 0; index < portfolioSize; index++)
 		{
-			this.portfolioSize--;
-			for(int i = index; i <= portfolioSize-1; i++)
+			if(stockSymbol.equals(this.stocks[index].getStockSymbol()))
 			{
-				this.stocks[i] = this.stocks[i+1];
-				//add remove stock status
-				this.stocksStatus[i] = this.stocksStatus[i+1];
+				sellStock(this.stocks[index].getStockSymbol(),this.stocksStatus[index].getStockQuantity());
+			
+				this.stocks[index] = null;
+
+				if(index == portfolioSize)
+					this.portfolioSize--;
+			
+				else 
+				{
+					this.portfolioSize--;
+					for(int i = index; i <= portfolioSize-1; i++)
+					{
+						this.stocks[i] = this.stocks[i+1];
+						this.stocksStatus[i] = this.stocksStatus[i+1];
+					}
+				}
+				return true;
 			}
 		}
 		
 		return false;
 	}	
 	
-	public boolean sellStock(String symbol,int quantity){
-		if(quantity == -1)
-		{
-			if(this.stocks)
-			updateBalance()
-		}
-		else if(quantity > 0)
-		{
-			
-		}
-		else //lower then -1 
-	}
-	
-	public bool buyStock(String symbol,int quantity){
-		
-	}
-	
+	/**
+	* Sell stock to from bool val if stock was found true else false.
+	* reduce the portfolio size.
+	*
+	* @param stock the sellStock from this stocks array.
+	* only sell the stock ,dosent remove! 
 	*/
+	
+	public boolean sellStock(String symbol,int quantity){
+			for(int i = 0; i < portfolioSize; i++)
+			{
+				if(this.stocks[i].getStockSymbol().equals(symbol))
+				{
+					if(quantity > stocksStatus[i].getStockQuantity())
+						quantity = stocksStatus[i].getStockQuantity();
+					
+					if(quantity == -1)
+					{
+						this.stocksStatus[i].setStockQuantity(0);
+						updateBalance(quantity * this.stocks[i].getBid());
+					}
+				
+					else if(quantity > 0)
+					{
+						this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() - quantity);
+						updateBalance(quantity * this.stocks[i].getBid());
+					}
+				
+					else //lower then -1 
+					{
+						System.out.println("Cant delete a negative number of quantity");
+						return false;
+					}
+					return true;
+				}
+			}
+			return false;
+	}
+	
+	/**
+	* Buy stock to from bool val if stock was found true else false.
+	* reduce the portfolio size.
+	*
+	* @param stock the buyStock from this stocks array.
+	* only buy the stock 
+	*/
+	
+	public boolean buyStock(String symbol,int quantity){
+		for(int i = 0; i < portfolioSize; i++)
+		{
+			if(this.stocks[i].getStockSymbol().equals(symbol))
+			{
+				if(quantity > stocksStatus[i].getStockQuantity())
+					quantity = stocksStatus[i].getStockQuantity();
+				
+				if(quantity == -1)
+				{
+					float res = getBalance() / (quantity * stocks[i].getAsk());
+					this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() + quantity);
+					updateBalance(res);
+				}
+			
+				else if(quantity > 0)
+				{
+					this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() + quantity);
+					updateBalance(quantity * this.stocks[i].getAsk());
+				}
+			
+				else //lower then -1 
+				{
+					System.out.println("Cant delete a negative number of quantity");
+					return false;
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+	
+//	public float getStocksValue(Stock s){
+		
+	//}
+	
+	
 	/**
 	* Returns the description portfolio.
 	* 
@@ -194,8 +259,9 @@ public class Portfolio {
 		String getHtmlString = getTitle() + "<br>";
 		
 		for(int i = 0; i < portfolioSize; i++)
-			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() +"<br><br>";
-
+			
+			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() + ", " + stocksStatus[i].getStockQuantity() +  "<br><br>";
+			
 		return getHtmlString;
 	}
 
@@ -221,13 +287,13 @@ public class Portfolio {
 		* @param StockStatus
 		*/
 		
-		public StockStatus(String string, float cBid, float cAsk, Date date1, ALGO_RECOMMENDATION recom, int stockQ){
-			symbol = string;
-			currentBid = cBid;
-			currentAsk = cAsk;
-			date = date1;
-			recommendation = recom;
-			stockQuantity = stockQ;
+		public StockStatus(String symbol, float bid, float ask, Date date, ALGO_RECOMMENDATION recom, int stockQuantity){
+			this.symbol = symbol;
+			this.currentBid = bid;
+			this.currentAsk = ask;
+			this.date = date;
+			this.recommendation = recom;
+			this.stockQuantity = stockQuantity;
 		}
 		
 		/**
@@ -238,8 +304,8 @@ public class Portfolio {
 		public StockStatus(StockStatus stockStatus){
 				this.symbol = stockStatus.symbol;
 				this.currentAsk = stockStatus.currentAsk;
-				this.currentAsk = stockStatus.currentBid;
-				this.date = new Date(stockStatus.date.getTime());
+				this.currentBid = stockStatus.currentBid;
+				this.date = new Date(stockStatus.date.getDate());
 				this.recommendation = stockStatus.recommendation;
 				this.stockQuantity = stockStatus.stockQuantity;
 		}

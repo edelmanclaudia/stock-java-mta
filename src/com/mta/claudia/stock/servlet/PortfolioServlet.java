@@ -26,23 +26,11 @@ public class PortfolioServlet extends HttpServlet {
 		Portfolio portfolio = portfolioService.getPortfolio(); 
 		Stock[] stocks = portfolio.getStocks();
 
-		Portfolio portfolio2 = new Portfolio(portfolio); 
+//		Portfolio portfolio2 = new Portfolio(portfolio); 
 
 		resp.getWriter().println(portfolio.getHtmlString() + "<br>");
-		portfolio2.setTitle("<h1>Portfolio 2#</h1>");
-		resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
-		
-		//portfolio.removeStock(0);
-		resp.getWriter().println("<h1><font color=darkblue> After Remove Stock: </font><h1>");
-		resp.getWriter().println("-----------------------------------------------------");
-		resp.getWriter().println(portfolio.getHtmlString() + "<br>");
-		resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
-		
-		portfolio2.getStocks()[2].setBid(55.55f);
-		resp.getWriter().println("<h1><font color=darkblue> After Change of Stock Bid: </font><h1>");
-		resp.getWriter().println("-----------------------------------------------------");
-		resp.getWriter().println(portfolio.getHtmlString() + "<br>");
-		resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
-
+//		portfolio2.setTitle("<h1>Portfolio 2#</h1>");
+//		resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
+	
 	}
 }
