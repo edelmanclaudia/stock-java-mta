@@ -32,7 +32,7 @@ public class PortfolioServlet extends HttpServlet {
 		portfolio2.setTitle("<h1>Portfolio 2#</h1>");
 		resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
 		
-		portfolio.removeStock(0);
+		//portfolio.removeStock(0);
 		resp.getWriter().println("<h1><font color=darkblue> After Remove Stock: </font><h1>");
 		resp.getWriter().println("-----------------------------------------------------");
 		resp.getWriter().println(portfolio.getHtmlString() + "<br>");

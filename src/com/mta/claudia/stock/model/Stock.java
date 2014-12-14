@@ -22,7 +22,7 @@ public class Stock {
 	*/
 	
 	public Stock(Stock stock){
-		this(stock.getStockSymbol(),stock.getAsk(),stock.getBid(),stock.getDate());
+		this(stock.getStockSymbol(),stock.getAsk(),stock.getBid(),new Date(stock.getDate().getTime()));
 	}
 	
 	/**
@@ -38,6 +38,8 @@ public class Stock {
 			setBid(bid1);
 			setDate(date1);
 		}
+		//else
+			//System.out.print
 	}
 	
 	//getters:

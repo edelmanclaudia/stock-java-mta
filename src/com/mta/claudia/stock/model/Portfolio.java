@@ -1,10 +1,6 @@
 package com.mta.claudia.stock.model;
 
 import java.util.Date;
-import java.util.Date;
-
-import com.google.appengine.api.socket.SocketServicePb.SetSocketOptionsReply;
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 
 /**
 * An instance of this class represents a portfoilio of stocks.
@@ -20,6 +16,7 @@ public class Portfolio {
 	private Stock[] stocks;
 	private StockStatus[] stocksStatus;
 	private int portfolioSize = 0; 
+	private float balance;
 	
 	//getters
 	public String getTitle() {
@@ -36,6 +33,10 @@ public class Portfolio {
 		
 	public StockStatus[] getStocksStatus() {
 		return stocksStatus;
+	}
+	
+	public float getBalance() {
+		return balance;
 	}
 	
 	//setters
@@ -55,6 +56,15 @@ public class Portfolio {
 		this.stocksStatus = stocksStatus;
 	}
 	
+	public void setBalance(float balance) {
+		this.balance = balance;
+	}
+	
+	public void updateBalance(float amount){
+		this.balance += amount;
+	}
+	
+
 	/**
 	* constructor
 	* @param portfolio allocates instances
@@ -74,6 +84,7 @@ public class Portfolio {
 		this();
 		this.title = portfolio.getTitle();
 		this.portfolioSize = portfolio.portfolioSize;
+		this.balance = portfolio.balance;
 		
 		for(int i = 0; i < portfolio.portfolioSize ; i++){
 			stocks[i] = new Stock(portfolio.getStocks()[i]);
@@ -86,12 +97,23 @@ public class Portfolio {
 	* @param portfolio
 	*/
 	
-	public Portfolio(String title1,Stock[] stocks1,StockStatus[] stockStatus1,int portfolioSize1){
+	public Portfolio(String title1,Stock[] stocks1,StockStatus[] stockStatus1,int portfolioSize1,float balance1){
 		setTitle(title1);
 		setStocks(stocks1);
 		setStocksStatus(stockStatus1);
 		setPortfolioSize(portfolioSize1);
+		setBalance(balance1);
 	}
+	
+	//public void updateStockStatus(Stock stock,StockStatus stockStatus){
+	//	stockStatus.setCurrentAsk(stock.getAsk());
+	//	stockStatus.setCurrentBid(stock.getBid());
+	//	stockStatus.setDate(stock.getDate());
+	//	stockStatus.setStockQuantity(0);
+	//	stockStatus.setSymbol(stock.getStockSymbol());
+		//stockStatus.setRecommendation(ALGO_RECOMMENDATION.DO_NOTHING);
+	//}
+	
 		
 	/**
 	* Adds stock to the stocks arrays the sum.
@@ -105,7 +127,13 @@ public class Portfolio {
 		if(portfolioSize < MAX_PORTFOLIO_SIZE)
 		{
 			stocks[portfolioSize] = stock;
+			//updateStockStatus(stock,stockStatus);
+			stocksStatus[portfolioSize] = new StockStatus(stock.getStockSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING, 0);
 			portfolioSize++;
+		}
+		else
+		{
+			System.out.println("Cant add new stock, portfolio can have only " + portfolioSize + " stocks");
 		}
 	}
 	
@@ -116,8 +144,10 @@ public class Portfolio {
 	* @param stock the removeStock from this stocks array.
 	* delete the stock by the index place and moves the other stock to the left 
 	*/
-	
-	public void removeStock(int index){
+	/*
+	public boolean removeStock(int index){
+		this.stocks[index] = null;
+
 		if(index == portfolioSize)
 			this.portfolioSize--;
 		else 
@@ -126,10 +156,32 @@ public class Portfolio {
 			for(int i = index; i <= portfolioSize-1; i++)
 			{
 				this.stocks[i] = this.stocks[i+1];
+				//add remove stock status
+				this.stocksStatus[i] = this.stocksStatus[i+1];
 			}
 		}
+		
+		return false;
 	}	
 	
+	public boolean sellStock(String symbol,int quantity){
+		if(quantity == -1)
+		{
+			if(this.stocks)
+			updateBalance()
+		}
+		else if(quantity > 0)
+		{
+			
+		}
+		else //lower then -1 
+	}
+	
+	public bool buyStock(String symbol,int quantity){
+		
+	}
+	
+	*/
 	/**
 	* Returns the description portfolio.
 	* 
@@ -154,41 +206,42 @@ public class Portfolio {
 	* date 2/12/2014
 	*/
 	
+	private static enum ALGO_RECOMMENDATION{DO_NOTHING,BUY,SELL};
+
 	public class StockStatus {
-		public final static int DO_NOTHING = 0;
-		public final static int BUY = 1;
-		public final static int SELL = 2;
 		
 		private String symbol;
 		private float currentBid , currentAsk;
 		private Date date;
-		private int recommendation;
+		private ALGO_RECOMMENDATION recommendation;
 		private int stockQuantity;
-
-		/**
-		* copy constructor
-		* @param StockStatus
-		*/
-		
-		public StockStatus(){
-			
-		}
 		
 		/**
 		* constructor
 		* @param StockStatus
 		*/
+		
+		public StockStatus(String string, float cBid, float cAsk, Date date1, ALGO_RECOMMENDATION recom, int stockQ){
+			symbol = string;
+			currentBid = cBid;
+			currentAsk = cAsk;
+			date = date1;
+			recommendation = recom;
+			stockQuantity = stockQ;
+		}
+		
+		/**
+		* copy constructor
+		* @param StockStatus
+		*/
 			
 		public StockStatus(StockStatus stockStatus){
-			if(this.symbol != null)
-			{
 				this.symbol = stockStatus.symbol;
 				this.currentAsk = stockStatus.currentAsk;
 				this.currentAsk = stockStatus.currentBid;
-				this.date = stockStatus.date;
+				this.date = new Date(stockStatus.date.getTime());
 				this.recommendation = stockStatus.recommendation;
 				this.stockQuantity = stockStatus.stockQuantity;
-			}
 		}
 		
 		//getters : 
@@ -208,7 +261,7 @@ public class Portfolio {
 			return date;
 		}
 		
-		public int getRecommendation() {
+		public ALGO_RECOMMENDATION getRecommendation() {
 			return recommendation;
 		}
 		
@@ -233,7 +286,7 @@ public class Portfolio {
 			this.date = date;
 		}
 		
-		public void setRecommendation(int recommendation) {
+		public void setRecommendation(ALGO_RECOMMENDATION recommendation) {
 			this.recommendation = recommendation;
 		}
 		
