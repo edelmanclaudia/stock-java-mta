@@ -60,6 +60,11 @@ public class Portfolio {
 		this.balance = balance;
 	}
 	
+	/**
+	* update the current balance
+	* @param get an amount to add to the balance 
+	*/
+	
 	public void updateBalance(float amount){
 		this.balance += amount;
 	}
@@ -242,10 +247,35 @@ public class Portfolio {
 		return false;
 	}
 	
-//	public float getStocksValue(Stock s){
-		
-	//}
+	/**
+	* Returns the total value of stocks in portfolio.
+	* 
+	*
+	* @param runs on the stocks array and add the value to the total 
+	* * @return total value stock.
+	*/
 	
+	public float getStocksValue(Stock stocks[]){
+		float totalValueStocks = 0;
+		
+		for(int i = 0; i < portfolioSize; i++){
+			totalValueStocks += stocks[i].getAsk() * stocksStatus[i].stockQuantity;
+		}
+		return totalValueStocks;
+	}
+	
+	/**
+	* Returns sum of  total value of stocks & balance in portfolio.
+	* 
+	*
+	* @param runs on the stocks array and add the value to the total and add the portfolio balance
+	* * @return the get total value.
+	*/
+	public float getTotalValue(Stock stocks[]){
+		float sumTotalValueStock =	getStocksValue(stocks) + getBalance();
+		
+		return sumTotalValueStock;
+	}
 	
 	/**
 	* Returns the description portfolio.
@@ -258,6 +288,8 @@ public class Portfolio {
 	public String getHtmlString(){
 		String getHtmlString = getTitle() + "<br>";
 		
+		getHtmlString += "<b> Total Portfolio Value: </b>" + getStocksValue(stocks) + "$  , <b> Total Stocks value: </b>" + getTotalValue(stocks)+"$  , <b> Balance: </b>" + getBalance() + "$ <br><br>";
+				
 		for(int i = 0; i < portfolioSize; i++)
 			
 			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() + ", " + stocksStatus[i].getStockQuantity() +  "<br><br>";
