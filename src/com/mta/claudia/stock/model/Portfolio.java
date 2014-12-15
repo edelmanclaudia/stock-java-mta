@@ -182,10 +182,7 @@ public class Portfolio {
 		{
 			if(this.stocks[i].getStockSymbol().equals(symbol))
 			{
-				if(quantity > stocksStatus[i].getStockQuantity())
-					quantity = stocksStatus[i].getStockQuantity();
-
-				if(quantity == -1)
+				if(quantity == -1 || quantity > stocksStatus[i].getStockQuantity())
 				{
 					updateBalance(stocksStatus[i].getStockQuantity() * this.stocksStatus[i].getCurrentBid());
 					this.stocksStatus[i].setStockQuantity(0);
@@ -223,25 +220,29 @@ public class Portfolio {
 		{
 			if(this.stocks[i].getStockSymbol().equals(symbol))
 			{
-				if(quantity > stocksStatus[i].getStockQuantity())
-					quantity = stocksStatus[i].getStockQuantity();
-
 				if(quantity == -1)
 				{
-					float res = getBalance() /(stocksStatus[i].getCurrentAsk());
-					quantity = (int)res;
-					this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() + quantity);
-					updateBalance(-res);
+					//float res = getBalance() /(stocksStatus[i].getCurrentAsk());
+					quantity = (int)(getBalance() /(stocksStatus[i].getCurrentAsk()))
+							;
+					this.stocksStatus[i].stockQuantity +=  quantity;
+					updateBalance(-(quantity * this.stocksStatus[i].getCurrentAsk()));
 					System.out.println(this.stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were bought"); 
 				}
 
 				else if(quantity > 0)
 				{
-					this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() + quantity);
-					updateBalance(-(quantity * this.stocksStatus[i].getCurrentAsk()));
-					System.out.println(this.stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were bought"); 
-				}
+					if(quantity * this.stocksStatus[i].getCurrentAsk() <= getBalance())
+					{	
+						this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() + quantity);
+						updateBalance(-(quantity * this.stocksStatus[i].getCurrentAsk()));
+						System.out.println(this.stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were bought"); 
+					}
+					
+					else
+						System.out.println("You do not have enough money to buy Stocks of " +symbol+ " were bought"); 
 
+				}
 				else //lower then -1 
 				{
 					System.out.println("Cant delete a negative number of quantity");
