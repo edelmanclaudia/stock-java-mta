@@ -87,8 +87,8 @@ public class Stock {
 	*/
 	
 	public String getHtmlDescription(){
-		String stockHtmlDetailsString = "<b>Stock symbol</b>: " +getStockSymbol()+ ",<b>ask</b>: " +getAsk()+ ",<b>bid</b>: "
-										+getBid()+ ",<b>date</b>: " +date.getDate()+ "/" +date.getMonth()+ "/" +date.getYear();
+		String stockHtmlDetailsString = "<b>Stock symbol</b>: " +getStockSymbol()+ " , <b>ask</b>: " +getAsk()+ " , <b>bid</b>: "
+										+getBid()+ " , <b>date</b>: " +date.getDate()+ "/" +date.getMonth()+ "/" +date.getYear();
 		return stockHtmlDetailsString;
 	}
 }

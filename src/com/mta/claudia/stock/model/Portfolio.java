@@ -66,7 +66,10 @@ public class Portfolio {
 	*/
 	
 	public void updateBalance(float amount){
-		this.balance += amount;
+		if(amount < 0)
+			this.balance -= amount;
+		else
+			this.balance += amount;
 	}
 	
 
@@ -127,9 +130,7 @@ public class Portfolio {
 			portfolioSize++;
 		}
 		else
-		{
 			System.out.println("Cant add new stock, portfolio can have only " + portfolioSize + " stocks");
-		}
 	}
 	
 	/**
@@ -164,6 +165,7 @@ public class Portfolio {
 				return true;
 			}
 		}
+		System.out.println("The stock " +stockSymbol+ " dosent exist in the portfolio");
 		
 		return false;
 	}	
@@ -225,15 +227,16 @@ public class Portfolio {
 				
 				if(quantity == -1)
 				{
-					float res = getBalance() / (quantity * stocks[i].getAsk());
+					float res = getBalance() /(stocks[i].getAsk());
+					quantity = (int)res;
 					this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() + quantity);
-					updateBalance(res);
+					updateBalance(-res);
 				}
 			
 				else if(quantity > 0)
 				{
 					this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() + quantity);
-					updateBalance(quantity * this.stocks[i].getAsk());
+					updateBalance(-(quantity * this.stocks[i].getAsk()));
 				}
 			
 				else //lower then -1 
@@ -259,7 +262,7 @@ public class Portfolio {
 		float totalValueStocks = 0;
 		
 		for(int i = 0; i < portfolioSize; i++){
-			totalValueStocks += stocks[i].getAsk() * stocksStatus[i].stockQuantity;
+			totalValueStocks += stocks[i].getBid() * stocksStatus[i].stockQuantity;
 		}
 		return totalValueStocks;
 	}
@@ -289,10 +292,12 @@ public class Portfolio {
 		String getHtmlString = getTitle() + "<br>";
 		
 		getHtmlString += "<b> Total Portfolio Value: </b>" + getStocksValue(stocks) + "$  , <b> Total Stocks value: </b>" + getTotalValue(stocks)+"$  , <b> Balance: </b>" + getBalance() + "$ <br><br>";
-				
+		
+		getHtmlString += "<br> <b>Stock Details</b> <br>";
+		getHtmlString += "---------------------------------- <br>";
 		for(int i = 0; i < portfolioSize; i++)
 			
-			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() + ", " + stocksStatus[i].getStockQuantity() +  "<br><br>";
+			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() + "<br><br>";
 			
 		return getHtmlString;
 	}
