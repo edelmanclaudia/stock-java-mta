@@ -45,8 +45,9 @@ public class PortfolioService {
 				
 		myPortfolio.sellStock("AAL", -1);
 		myPortfolio.removeStock("CAAS");
-// 		myPortfolio.removeStock("google");
-//		myPortfolio.buyStock("AAL", 10);
+		//myPortfolio.removeStock("google");
+		//myPortfolio.sellStock("PIH", 2);
+		//myPortfolio.buyStock("AAL", 10);
 		
 		myPortfolio.setTitle("<h1>Portfolio 1#</h1>");
 		
