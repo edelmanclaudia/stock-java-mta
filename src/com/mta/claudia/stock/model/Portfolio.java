@@ -69,7 +69,6 @@ public class Portfolio {
 		this.balance += amount;
 	}
 
-
 	/**
 	 * constructor
 	 * @param portfolio allocates instances
@@ -80,6 +79,19 @@ public class Portfolio {
 		setStocksStatus(new StockStatus[MAX_PORTFOLIO_SIZE]);
 	}
 
+	/**
+	 * constructor
+	 * @param portfolio
+	 */
+
+	public Portfolio(String title,Stock[] stocks,StockStatus[] stockStatus,int portfolioSize,float balance){
+		setTitle(title);
+		setStocks(stocks);
+		setStocksStatus(stockStatus);
+		setPortfolioSize(portfolioSize);
+		setBalance(balance);
+	}
+	
 	/**
 	 * copy constructor
 	 * @param portfolio
@@ -95,19 +107,6 @@ public class Portfolio {
 			stocks[i] = new Stock(portfolio.getStocks()[i]);
 			stocksStatus[i] = new StockStatus(portfolio.getStocksStatus()[i]);
 		}
-	}
-
-	/**
-	 * constructor
-	 * @param portfolio
-	 */
-
-	public Portfolio(String title,Stock[] stocks,StockStatus[] stockStatus,int portfolioSize,float balance){
-		setTitle(title);
-		setStocks(stocks);
-		setStocksStatus(stockStatus);
-		setPortfolioSize(portfolioSize);
-		setBalance(balance);
 	}
 
 	/**
@@ -238,7 +237,7 @@ public class Portfolio {
 						updateBalance(-(quantity * this.stocksStatus[i].getCurrentAsk()));
 						System.out.println(this.stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were bought"); 
 					}
-					
+
 					else
 						System.out.println("You do not have enough money to buy Stocks of " +symbol+ " were bought"); 
 

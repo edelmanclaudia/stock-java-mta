@@ -11,26 +11,26 @@ import com.mta.claudia.stock.model.Stock;
 import com.mta.claudia.stock.service.PortfolioService;
 
 /**
-* An instance of this class represents a Portfolio Servlet.
-* @author Claudia Edelman
-* @since 2014
-* date 2/12/2014
-*/
+ * An instance of this class represents a Portfolio Servlet.
+ * @author Claudia Edelman
+ * @since 2014
+ * date 2/12/2014
+ */
 
 public class PortfolioServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException{
 		resp.setContentType("text/html");
-		
+
 		PortfolioService portfolioService = new PortfolioService(); 
 		Portfolio portfolio = portfolioService.getPortfolio(); 
 		Stock[] stocks = portfolio.getStocks();
 
-//		Portfolio portfolio2 = new Portfolio(portfolio); 
+		//		Portfolio portfolio2 = new Portfolio(portfolio); 
 
 		resp.getWriter().println(portfolio.getHtmlString() + "<br>");
-//		portfolio2.setTitle("<h1>Portfolio 2#</h1>");
-//		resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
-	
+		//		portfolio2.setTitle("<h1>Portfolio 2#</h1>");
+		//		resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
+
 	}
 }
