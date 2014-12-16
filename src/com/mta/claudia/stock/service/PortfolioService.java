@@ -24,6 +24,7 @@ public class PortfolioService {
 	 * * @return myportfolio with an array of stocks.
 	 */
 
+	@SuppressWarnings("deprecation")
 	public Portfolio getPortfolio(){
 
 		Portfolio myPortfolio = new Portfolio();

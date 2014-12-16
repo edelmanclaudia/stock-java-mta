@@ -17,6 +17,7 @@ import com.mta.claudia.stock.service.PortfolioService;
  * date 2/12/2014
  */
 
+@SuppressWarnings("serial")
 public class PortfolioServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException{
@@ -24,6 +25,7 @@ public class PortfolioServlet extends HttpServlet {
 
 		PortfolioService portfolioService = new PortfolioService(); 
 		Portfolio portfolio = portfolioService.getPortfolio(); 
+		@SuppressWarnings("unused")
 		Stock[] stocks = portfolio.getStocks();
 
 		//		Portfolio portfolio2 = new Portfolio(portfolio); 

@@ -91,7 +91,7 @@ public class Portfolio {
 		setPortfolioSize(portfolioSize);
 		setBalance(balance);
 	}
-	
+
 	/**
 	 * copy constructor
 	 * @param portfolio
@@ -119,7 +119,19 @@ public class Portfolio {
 	 */
 
 	public void addStock(Stock stock,int quantity){
-		if(portfolioSize < MAX_PORTFOLIO_SIZE)
+		boolean flag = true;
+
+		for(int i = 0; i < portfolioSize; i++)
+		{
+			if(stock.getStockSymbol().equals(stocks[i].getStockSymbol()) )
+			{
+				System.out.println("You own this kind of stock , therefor no need to add the stock!");
+				flag = false;
+				break;
+			}
+		}
+
+		if(portfolioSize < MAX_PORTFOLIO_SIZE && flag)
 		{
 			stocks[portfolioSize] = stock;
 			stocksStatus[portfolioSize] = new StockStatus(stock.getStockSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING, quantity);
@@ -181,12 +193,15 @@ public class Portfolio {
 		{
 			if(this.stocks[i].getStockSymbol().equals(symbol))
 			{
-				if(quantity == -1 || quantity > stocksStatus[i].getStockQuantity())
+				if(quantity == -1)
 				{
 					updateBalance(stocksStatus[i].getStockQuantity() * this.stocksStatus[i].getCurrentBid());
 					this.stocksStatus[i].setStockQuantity(0);
 					System.out.println(stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were sold"); 
 				}
+
+				else if(quantity > stocksStatus[i].getStockQuantity())
+					System.out.println("Not enough stocks to sell");
 
 				else if(quantity > 0)
 				{
@@ -239,7 +254,7 @@ public class Portfolio {
 					}
 
 					else
-						System.out.println("You do not have enough money to buy Stocks of " +symbol+ " were bought"); 
+						System.out.println("Not enough balance to complete purchase"); 
 
 				}
 				else //lower then -1 
@@ -346,7 +361,7 @@ public class Portfolio {
 			this.symbol = stockStatus.symbol;
 			this.currentAsk = stockStatus.currentAsk;
 			this.currentBid = stockStatus.currentBid;
-			this.date = new Date(stockStatus.date.getDate());
+			this.date = new Date(stockStatus.date.getTime());
 			this.recommendation = stockStatus.recommendation;
 			this.stockQuantity = stockStatus.stockQuantity;
 		}
