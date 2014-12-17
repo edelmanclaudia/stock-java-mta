@@ -40,9 +40,13 @@ public class PortfolioService {
 		Stock stock2 = new Stock ("AAL",30,25.5f,date);
 		Stock stock3 = new Stock ("CAAS",20,15.5f,date);
 
-		myPortfolio.addStock(stock1,20);
-		myPortfolio.addStock(stock2,30);
-		myPortfolio.addStock(stock3,40);
+		myPortfolio.addStock(stock1);
+		myPortfolio.addStock(stock2);
+		myPortfolio.addStock(stock3);
+
+		myPortfolio.buyStock("PIH", 20);
+		myPortfolio.buyStock("AAL", 30);
+		myPortfolio.buyStock("CAAS",40);
 
 		myPortfolio.sellStock("AAL", -1);
 		myPortfolio.removeStock("CAAS");

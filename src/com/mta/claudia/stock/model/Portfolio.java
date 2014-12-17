@@ -118,7 +118,7 @@ public class Portfolio {
 	 * 
 	 */
 
-	public void addStock(Stock stock,int quantity){
+	public void addStock(Stock stock){
 		boolean flag = true;
 
 		for(int i = 0; i < portfolioSize; i++)
@@ -134,7 +134,7 @@ public class Portfolio {
 		if(portfolioSize < MAX_PORTFOLIO_SIZE && flag)
 		{
 			stocks[portfolioSize] = stock;
-			stocksStatus[portfolioSize] = new StockStatus(stock.getStockSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING, quantity);
+			stocksStatus[portfolioSize] = new StockStatus(stock.getStockSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING,0);
 			portfolioSize++;
 		}
 		else
@@ -171,7 +171,7 @@ public class Portfolio {
 					}
 				}
 
-				System.out.println("The stock " +stockSymbol+ "was removed sucessfully");
+				System.out.println("The stock " +stockSymbol+ " was removed sucessfully");
 				return true;
 			}
 		}
@@ -196,8 +196,8 @@ public class Portfolio {
 				if(quantity == -1)
 				{
 					updateBalance(stocksStatus[i].getStockQuantity() * this.stocksStatus[i].getCurrentBid());
-					this.stocksStatus[i].setStockQuantity(0);
 					System.out.println(stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were sold"); 
+					this.stocksStatus[i].setStockQuantity(0);
 				}
 
 				else if(quantity > stocksStatus[i].getStockQuantity())
@@ -310,7 +310,7 @@ public class Portfolio {
 	public String getHtmlString(){
 		String getHtmlString = getTitle() + "<br>";
 
-		getHtmlString += "<b> Total Portfolio Value: </b>" + getStocksValue(stocks) + "$  , <b> Total Stocks value: </b>" + getTotalValue(stocks)+"$  , <b> Balance: </b>" + getBalance() + "$ <br><br>";
+		getHtmlString += "<b> Total Portfolio Value: </b>" + getTotalValue(stocks) + "$  , <b> Total Stocks value: </b>" + getStocksValue(stocks) +"$  , <b> Balance: </b>" + getBalance() + "$ <br><br>";
 
 		getHtmlString += "<br> <b>Stock Details</b> <br>";
 		getHtmlString += "---------------------------------- <br>";
