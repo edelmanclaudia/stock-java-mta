@@ -316,7 +316,7 @@ public class Portfolio {
 		getHtmlString += "---------------------------------- <br>";
 		for(int i = 0; i < portfolioSize; i++)
 
-			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() + " , " +stocksStatus[i].getStockQuantity()+ "<br><br>";
+			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() + " ,<br><br>";
 
 		return getHtmlString;
 	}
