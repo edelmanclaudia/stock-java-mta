@@ -312,11 +312,12 @@ public class Portfolio {
 
 		getHtmlString += "<b> Total Portfolio Value: </b>" + getTotalValue(stocks) + "$  , <b> Total Stocks value: </b>" + getStocksValue(stocks) +"$  , <b> Balance: </b>" + getBalance() + "$ <br><br>";
 
-		getHtmlString += "<br> <b>Stock Details</b> <br>";
-		getHtmlString += "---------------------------------- <br>";
+		getHtmlString += "<br><font color=darkblue><b>Stock Details:</b></font color=dark blue>";
+		getHtmlString += "<br><font color=darkblue><b>______________</b></font color=dark blue><br><br>";
+
 		for(int i = 0; i < portfolioSize; i++)
 
-			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() + "<br><br>";
+			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() + " , <b>quantity</b>: " +stocksStatus[i].getStockQuantity()+ "<br><br>";
 
 		return getHtmlString;
 	}
