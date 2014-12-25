@@ -1,5 +1,6 @@
 package com.mta.claudia.stock.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -89,7 +90,7 @@ public class Stock {
 
 	public String getHtmlDescription(){
 		String stockHtmlDetailsString = "<b>Stock symbol</b>: " +getStockSymbol()+ " , <b>ask</b>: " +getAsk()+ " , <b>bid</b>: "
-				+getBid()+ " , <b>date</b>: " +date.getDate()+ "/" +date.getMonth()+ "/" +date.getYear();
+				+getBid()+ " , <b>date</b>: " +new SimpleDateFormat("dd-MM-yyyy").format(date); //+date.getDate()+ "/" +date.getMonth()+ "/" +date.getYear();
 		return stockHtmlDetailsString;
 	}
 }

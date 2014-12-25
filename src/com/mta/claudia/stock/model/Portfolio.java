@@ -237,8 +237,7 @@ public class Portfolio {
 				if(quantity == -1)
 				{
 					//float res = getBalance() /(stocksStatus[i].getCurrentAsk());
-					quantity = (int)(getBalance() /(stocksStatus[i].getCurrentAsk()))
-							;
+					quantity = (int)(getBalance() /(stocksStatus[i].getCurrentAsk()));
 					this.stocksStatus[i].stockQuantity +=  quantity;
 					updateBalance(-(quantity * this.stocksStatus[i].getCurrentAsk()));
 					System.out.println(this.stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were bought"); 

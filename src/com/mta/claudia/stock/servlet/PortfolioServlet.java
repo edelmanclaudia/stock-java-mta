@@ -28,11 +28,11 @@ public class PortfolioServlet extends HttpServlet {
 		@SuppressWarnings("unused")
 		Stock[] stocks = portfolio.getStocks();
 
-		//		Portfolio portfolio2 = new Portfolio(portfolio); 
+	//	Portfolio portfolio2 = new Portfolio(portfolio); 
 
 		resp.getWriter().println(portfolio.getHtmlString() + "<br>");
-		//		portfolio2.setTitle("<h1>Portfolio 2#</h1>");
-		//		resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
+	//	portfolio2.setTitle("<h1>Portfolio 2#</h1>");
+	//	resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
 
 	}
 }
