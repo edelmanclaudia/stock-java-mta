@@ -195,7 +195,7 @@ public class Portfolio {
 			{
 				if(quantity == -1)
 				{
-					updateBalance(stocksStatus[i].getStockQuantity() * this.stocksStatus[i].getCurrentBid());
+					updateBalance(stocksStatus[i].getStockQuantity() * this.stocksStatus[i].getBid());
 					System.out.println(stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were sold"); 
 					this.stocksStatus[i].setStockQuantity(0);
 				}
@@ -206,7 +206,7 @@ public class Portfolio {
 				else if(quantity > 0)
 				{
 					this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() - quantity);
-					updateBalance(quantity * this.stocksStatus[i].getCurrentBid());
+					updateBalance(quantity * this.stocksStatus[i].getBid());
 					System.out.println(quantity + " Stocks of " +symbol+ " were sold"); 
 				}
 
@@ -237,18 +237,18 @@ public class Portfolio {
 				if(quantity == -1)
 				{
 					//float res = getBalance() /(stocksStatus[i].getCurrentAsk());
-					quantity = (int)(getBalance() /(stocksStatus[i].getCurrentAsk()));
-					this.stocksStatus[i].stockQuantity +=  quantity;
-					updateBalance(-(quantity * this.stocksStatus[i].getCurrentAsk()));
+					quantity = (int)(getBalance() /(stocksStatus[i].getAsk()));
+					this.stocksStatus[i].setStockQuantity(stocksStatus[i].getStockQuantity()+quantity);
+					updateBalance(-(quantity * this.stocksStatus[i].getAsk()));
 					System.out.println(this.stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were bought"); 
 				}
 
 				else if(quantity > 0)
 				{
-					if(quantity * this.stocksStatus[i].getCurrentAsk() <= getBalance())
+					if(quantity * this.stocksStatus[i].getAsk() <= getBalance())
 					{	
 						this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() + quantity);
-						updateBalance(-(quantity * this.stocksStatus[i].getCurrentAsk()));
+						updateBalance(-(quantity * this.stocksStatus[i].getAsk()));
 						System.out.println(this.stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were bought"); 
 					}
 
@@ -279,7 +279,7 @@ public class Portfolio {
 		float totalValueStocks = 0;
 
 		for(int i = 0; i < portfolioSize; i++){
-			totalValueStocks += stocksStatus[i].getCurrentBid() * stocksStatus[i].stockQuantity;
+			totalValueStocks += stocksStatus[i].getBid() * stocksStatus[i].getStockQuantity();
 		}
 		return totalValueStocks;
 	}
@@ -328,92 +328,6 @@ public class Portfolio {
 	 * date 2/12/2014
 	 */
 
-	private static enum ALGO_RECOMMENDATION{DO_NOTHING,BUY,SELL};
+	public static enum ALGO_RECOMMENDATION{DO_NOTHING,BUY,SELL};
 
-	public class StockStatus {
-
-		private String symbol;
-		private float currentBid , currentAsk;
-		private Date date;
-		private ALGO_RECOMMENDATION recommendation;
-		private int stockQuantity;
-
-		/**
-		 * constructor
-		 * @param StockStatus
-		 */
-
-		public StockStatus(String symbol, float bid, float ask, Date date, ALGO_RECOMMENDATION recom, int stockQuantity){
-			this.symbol = symbol;
-			this.currentBid = bid;
-			this.currentAsk = ask;
-			this.date = date;
-			this.recommendation = recom;
-			this.stockQuantity = stockQuantity;
-		}
-
-		/**
-		 * copy constructor
-		 * @param StockStatus
-		 */
-
-		public StockStatus(StockStatus stockStatus){
-			this.symbol = stockStatus.symbol;
-			this.currentAsk = stockStatus.currentAsk;
-			this.currentBid = stockStatus.currentBid;
-			this.date = new Date(stockStatus.date.getTime());
-			this.recommendation = stockStatus.recommendation;
-			this.stockQuantity = stockStatus.stockQuantity;
-		}
-
-		//getters : 
-		public String getSymbol() {
-			return symbol;
-		}
-
-		public float getCurrentBid() {
-			return currentBid;
-		}
-
-		public float getCurrentAsk() {
-			return currentAsk;
-		}
-
-		public Date getDate() {
-			return date;
-		}
-
-		public ALGO_RECOMMENDATION getRecommendation() {
-			return recommendation;
-		}
-
-		public int getStockQuantity() {
-			return stockQuantity;
-		}
-
-		//setters:
-		public void setSymbol(String symbol) {
-			this.symbol = symbol;
-		}
-
-		public void setCurrentBid(float currentBid) {
-			this.currentBid = currentBid;
-		}
-
-		public void setCurrentAsk(float currentAsk) {
-			this.currentAsk = currentAsk;
-		}
-
-		public void setDate(Date date) {
-			this.date = date;
-		}
-
-		public void setRecommendation(ALGO_RECOMMENDATION recommendation) {
-			this.recommendation = recommendation;
-		}
-
-		public void setStockQuantity(int stockQuantity) {
-			this.stockQuantity = stockQuantity;
-		}		
-	}
 }

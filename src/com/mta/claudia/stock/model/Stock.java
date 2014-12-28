@@ -12,16 +12,22 @@ import java.util.Date;
 
 public class Stock {
 
-	private String stockSymbol;
-	private float ask;
-	private float bid;
-	private Date date;
+	protected String stockSymbol;
+	protected float ask;
+	protected float bid;
+	protected Date date;
 
+	public Stock(){
+		
+	}
+	
 	/**
 	 * copy constructor
 	 * @param stocks 
 	 */
 
+	
+	
 	public Stock(Stock stock){
 		this(stock.getStockSymbol(),stock.getAsk(),stock.getBid(),new Date(stock.getDate().getTime()));
 	}

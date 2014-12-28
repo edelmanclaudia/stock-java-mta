@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.google.appengine.api.modules.ModulesServicePb.StopModuleRequest;
 import com.mta.claudia.stock.model.Portfolio;
-import com.mta.claudia.stock.model.Portfolio.StockStatus;
 import com.mta.claudia.stock.model.Stock;
 
 /**
