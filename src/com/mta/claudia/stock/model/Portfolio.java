@@ -11,12 +11,13 @@ import java.util.Date;
 
 public class Portfolio {
 	private final static int MAX_PORTFOLIO_SIZE = 5;
+	public static enum ALGO_RECOMMENDATION{DO_NOTHING,BUY,SELL};
 
 	private String title;
-	private Stock[] stocks;
 	private StockStatus[] stocksStatus;
 	private int portfolioSize = 0; 
 	private float balance = 0;
+	
 
 	//getters
 	public String getTitle() {
@@ -25,10 +26,6 @@ public class Portfolio {
 
 	public int getPortfolioSize(){
 		return portfolioSize = 0;
-	}
-
-	public Stock[] getStocks() {
-		return stocks;
 	}
 
 	public StockStatus[] getStocksStatus() {
@@ -42,10 +39,6 @@ public class Portfolio {
 	//setters
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public void setStocks(Stock[] stocks) {
-		this.stocks = stocks;
 	}
 
 	public void setPortfolioSize(int portfolioSize) {
@@ -75,7 +68,6 @@ public class Portfolio {
 	 */
 
 	public Portfolio(){
-		stocks = new Stock[MAX_PORTFOLIO_SIZE];
 		setStocksStatus(new StockStatus[MAX_PORTFOLIO_SIZE]);
 	}
 
@@ -84,9 +76,8 @@ public class Portfolio {
 	 * @param portfolio
 	 */
 
-	public Portfolio(String title,Stock[] stocks,StockStatus[] stockStatus,int portfolioSize,float balance){
+	public Portfolio(String title,StockStatus[] stockStatus,int portfolioSize,float balance){
 		setTitle(title);
-		setStocks(stocks);
 		setStocksStatus(stockStatus);
 		setPortfolioSize(portfolioSize);
 		setBalance(balance);
@@ -104,7 +95,6 @@ public class Portfolio {
 		this.balance = portfolio.balance;
 
 		for(int i = 0; i < portfolio.portfolioSize ; i++){
-			stocks[i] = new Stock(portfolio.getStocks()[i]);
 			stocksStatus[i] = new StockStatus(portfolio.getStocksStatus()[i]);
 		}
 	}
@@ -123,7 +113,7 @@ public class Portfolio {
 
 		for(int i = 0; i < portfolioSize; i++)
 		{
-			if(stock.getStockSymbol().equals(stocks[i].getStockSymbol()) )
+			if(stock.getStockSymbol().equals(stocksStatus[i].getStockSymbol()) )
 			{
 				System.out.println("You own this kind of stock , therefor no need to add the stock!");
 				flag = false;
@@ -133,7 +123,7 @@ public class Portfolio {
 
 		if(portfolioSize < MAX_PORTFOLIO_SIZE && flag)
 		{
-			stocks[portfolioSize] = stock;
+			//stocksStatus[portfolioSize] = stock;
 			stocksStatus[portfolioSize] = new StockStatus(stock.getStockSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING,0);
 			portfolioSize++;
 		}
@@ -152,11 +142,11 @@ public class Portfolio {
 	public boolean removeStock(String stockSymbol){
 		for(int index = 0; index < portfolioSize; index++)
 		{
-			if(stockSymbol.equals(this.stocks[index].getStockSymbol()))
+			if(stockSymbol.equals(this.stocksStatus[index].getStockSymbol()))
 			{
-				sellStock(this.stocks[index].getStockSymbol(),this.stocksStatus[index].getStockQuantity());
+				sellStock(this.stocksStatus[index].getStockSymbol(),this.stocksStatus[index].getStockQuantity());
 
-				this.stocks[index] = null;
+				this.stocksStatus[index] = null;
 
 				if(index == portfolioSize)
 					this.portfolioSize--;
@@ -166,7 +156,6 @@ public class Portfolio {
 					this.portfolioSize--;
 					for(int i = index; i <= portfolioSize-1; i++)
 					{
-						this.stocks[i] = this.stocks[i+1];
 						this.stocksStatus[i] = this.stocksStatus[i+1];
 					}
 				}
@@ -191,7 +180,7 @@ public class Portfolio {
 	public boolean sellStock(String symbol,int quantity){
 		for(int i = 0; i < portfolioSize; i++)
 		{
-			if(this.stocks[i].getStockSymbol().equals(symbol))
+			if(this.stocksStatus[i].getStockSymbol().equals(symbol))
 			{
 				if(quantity == -1)
 				{
@@ -232,7 +221,7 @@ public class Portfolio {
 	public boolean buyStock(String symbol,int quantity){
 		for(int i = 0; i < portfolioSize; i++)
 		{
-			if(this.stocks[i].getStockSymbol().equals(symbol))
+			if(this.stocksStatus[i].getStockSymbol().equals(symbol))
 			{
 				if(quantity == -1)
 				{
@@ -309,25 +298,15 @@ public class Portfolio {
 	public String getHtmlString(){
 		String getHtmlString = getTitle() + "<br>";
 
-		getHtmlString += "<b> Total Portfolio Value: </b>" + getTotalValue(stocks) + "$  , <b> Total Stocks value: </b>" + getStocksValue(stocks) +"$  , <b> Balance: </b>" + getBalance() + "$ <br><br>";
+		getHtmlString += "<b> Total Portfolio Value: </b>" + getTotalValue(stocksStatus) + "$  , <b> Total Stocks value: </b>" + getStocksValue(stocksStatus) +"$  , <b> Balance: </b>" + getBalance() + "$ <br><br>";
 
 		getHtmlString += "<br><font color=darkblue><b>Stock Details:</b></font color=dark blue>";
 		getHtmlString += "<br><font color=darkblue><b>______________</b></font color=dark blue><br><br>";
 
 		for(int i = 0; i < portfolioSize; i++)
 
-			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocks[i].getHtmlDescription() + " , <b>quantity</b>: " +stocksStatus[i].getStockQuantity()+ "<br><br>";
+			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocksStatus[i].getHtmlDescription() + " , <b>quantity</b>: " +stocksStatus[i].getStockQuantity()+ "<br><br>";
 
 		return getHtmlString;
 	}
-
-	/**
-	 * An instance of this class represents the stock status.
-	 * @author Claudia Edelman
-	 * @since 2014
-	 * date 2/12/2014
-	 */
-
-	public static enum ALGO_RECOMMENDATION{DO_NOTHING,BUY,SELL};
-
 }

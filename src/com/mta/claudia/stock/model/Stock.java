@@ -17,17 +17,20 @@ public class Stock {
 	protected float bid;
 	protected Date date;
 
+	/**
+	 * constructor
+	 * @param stocks 
+	 */
+
 	public Stock(){
-		
+
 	}
-	
+
 	/**
 	 * copy constructor
 	 * @param stocks 
 	 */
 
-	
-	
 	public Stock(Stock stock){
 		this(stock.getStockSymbol(),stock.getAsk(),stock.getBid(),new Date(stock.getDate().getTime()));
 	}
@@ -51,7 +54,6 @@ public class Stock {
 	}
 
 	//getters:
-
 	public String getStockSymbol (){
 		return stockSymbol;
 	}
@@ -68,8 +70,8 @@ public class Stock {
 		return date;
 	}
 
+	
 	//setters:
-
 	public void setStockSymbol (String symbol){
 		stockSymbol = symbol;
 	}
@@ -86,6 +88,7 @@ public class Stock {
 		date = newDate;
 	}
 
+	
 	/**
 	 * Returns the description stocks.
 	 * 

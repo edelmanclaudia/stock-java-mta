@@ -25,8 +25,6 @@ public class PortfolioServlet extends HttpServlet {
 
 		PortfolioService portfolioService = new PortfolioService(); 
 		Portfolio portfolio = portfolioService.getPortfolio(); 
-		@SuppressWarnings("unused")
-		Stock[] stocks = portfolio.getStocks();
 
 	//	Portfolio portfolio2 = new Portfolio(portfolio); 
 
