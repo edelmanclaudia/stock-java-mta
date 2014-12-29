@@ -55,7 +55,7 @@ public class PortfolioService {
 		myPortfolio.sellStock("AAL", -1);
 		myPortfolio.removeStock("CAAS");
 
-		myPortfolio.setTitle("<p><center><h1><div style=background-color:pink> Exercise 8 portfolio</div style=background-color:pink></h1></center></p>");
+		myPortfolio.setTitle("<p><center><div style=background-color:pink><h1> Exercise 8 portfolio</h1></div style=background-color:pink></center></p>");
 
 		return myPortfolio;
 	}
