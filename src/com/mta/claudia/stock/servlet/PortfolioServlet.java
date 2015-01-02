@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mta.claudia.stock.model.Portfolio;
-import com.mta.claudia.stock.model.Stock;
 import com.mta.claudia.stock.service.PortfolioService;
 
 /**

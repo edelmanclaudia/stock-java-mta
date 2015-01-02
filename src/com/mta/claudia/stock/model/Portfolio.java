@@ -1,6 +1,5 @@
 package com.mta.claudia.stock.model;
 
-import java.util.Date;
 
 /**
  * An instance of this class represents a portfoilio of stocks.
@@ -303,6 +302,7 @@ public class Portfolio {
 		getHtmlString += "<br><font color=darkblue><b>Stock Details:</b></font color=dark blue>";
 		getHtmlString += "<br><font color=darkblue><b>______________</b></font color=dark blue><br><br>";
 
+		
 		for(int i = 0; i < portfolioSize; i++)
 
 			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocksStatus[i].getHtmlDescription() + " , <b>quantity</b>: " +stocksStatus[i].getStockQuantity()+ "<br><br>";

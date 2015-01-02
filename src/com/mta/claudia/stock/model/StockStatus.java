@@ -4,6 +4,12 @@ import java.util.Date;
 
 import com.mta.claudia.stock.model.Portfolio.ALGO_RECOMMENDATION;
 
+/**
+ * An instance of this class represents a Stock with all of its characters.
+ * @author Claudia Edelman
+ * @since 2014
+ * date 27/12/2014
+ */
 
 public class StockStatus extends Stock {
 
