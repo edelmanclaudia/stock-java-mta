@@ -295,8 +295,10 @@ public class Portfolio {
 	 */
 
 	public String getHtmlString(){
-		String getHtmlString = getTitle() + "<br>";
-
+		String getHtmlString = "<p><center><div style=background-color:pink><h1>";
+		getHtmlString += getTitle() + "<br>";
+		getHtmlString += "</div style=background-color:pink></center></p>";
+				
 		getHtmlString += "<b> Total Portfolio Value: </b>" + getTotalValue(stocksStatus) + "$  , <b> Total Stocks value: </b>" + getStocksValue(stocksStatus) +"$  , <b> Balance: </b>" + getBalance() + "$ <br><br>";
 
 		getHtmlString += "<br><font color=darkblue><b>Stock Details:</b></font color=dark blue>";
