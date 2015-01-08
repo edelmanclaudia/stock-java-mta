@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mta.claudia.stock.exception.BalanceException;
+import com.mta.claudia.stock.exception.PortfolioFullException;
+import com.mta.claudia.stock.exception.StockAlreadyExistsException;
+import com.mta.claudia.stock.exception.StockNotExistException;
 import com.mta.claudia.stock.model.Portfolio;
 import com.mta.claudia.stock.service.PortfolioService;
 
@@ -23,11 +27,27 @@ public class PortfolioServlet extends HttpServlet {
 		resp.setContentType("text/html");
 
 		PortfolioService portfolioService = new PortfolioService(); 
-		Portfolio portfolio = portfolioService.getPortfolio(); 
+		
+		Portfolio portfolio;
+		try {
+			portfolio = portfolioService.getPortfolio();
+			resp.getWriter().println(portfolio.getHtmlString() + "<br>");
+		} catch (BalanceException e1) {
+			 resp.getWriter().println(e1.getMessage());
+		} catch (PortfolioFullException e2) {
+			 resp.getWriter().println(e2.getMessage());
+		} catch (StockAlreadyExistsException e3) {
+			 resp.getWriter().println(e3.getMessage());
+		} catch (StockNotExistException e4) {
+			 resp.getWriter().println(e4.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 
+		
 	//	Portfolio portfolio2 = new Portfolio(portfolio); 
 
-		resp.getWriter().println(portfolio.getHtmlString() + "<br>");
 	//	portfolio2.setTitle("<h1>Portfolio 2#</h1>");
 	//	resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
 

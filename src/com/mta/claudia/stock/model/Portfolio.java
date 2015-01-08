@@ -1,5 +1,10 @@
 package com.mta.claudia.stock.model;
 
+import com.mta.claudia.stock.exception.BalanceException;
+import com.mta.claudia.stock.exception.PortfolioFullException;
+import com.mta.claudia.stock.exception.StockAlreadyExistsException;
+import com.mta.claudia.stock.exception.StockNotExistException;
+
 
 /**
  * An instance of this class represents a portfoilio of stocks.
@@ -107,38 +112,40 @@ public class Portfolio {
 	 * 
 	 */
 
-	public void addStock(Stock stock){
-		boolean flag = true;
+	public void addStock(Stock stock) throws Exception {
 
 		for(int i = 0; i < portfolioSize; i++)
 		{
 			if(stock.getStockSymbol().equals(stocksStatus[i].getStockSymbol()) )
 			{
 				System.out.println("You own this kind of stock , therefor no need to add the stock!");
-				flag = false;
-				break;
+				throw new StockAlreadyExistsException();
 			}
 		}
 
-		if(portfolioSize < MAX_PORTFOLIO_SIZE && flag)
+		if(portfolioSize < MAX_PORTFOLIO_SIZE )
 		{
 			//stocksStatus[portfolioSize] = stock;
 			stocksStatus[portfolioSize] = new StockStatus(stock.getStockSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING,0);
 			portfolioSize++;
 		}
 		else
+		{
 			System.out.println("Cant add new stock, portfolio can have only " + portfolioSize + " stocks");
+			throw new PortfolioFullException();
+	
+		}
 	}
-
 	/**
 	 * Remove stock to from stocks array.
 	 * reduce the portfolio size.
 	 *
 	 * @param stock the removeStock from this stocks array.
 	 * delete the stock by the index place and moves the other stock to the left 
+	 * @throws StockNotExistException 
 	 */
 
-	public boolean removeStock(String stockSymbol){
+	public void removeStock(String stockSymbol) throws StockNotExistException{
 		for(int index = 0; index < portfolioSize; index++)
 		{
 			if(stockSymbol.equals(this.stocksStatus[index].getStockSymbol()))
@@ -160,12 +167,10 @@ public class Portfolio {
 				}
 
 				System.out.println("The stock " +stockSymbol+ " was removed sucessfully");
-				return true;
 			}
 		}
 		System.out.println("The stock " +stockSymbol+ " dosent exist in the portfolio");
-
-		return false;
+		throw new StockNotExistException();
 	}	
 
 	/**
@@ -176,7 +181,7 @@ public class Portfolio {
 	 * only sell the stock ,dosent remove! 
 	 */
 
-	public boolean sellStock(String symbol,int quantity){
+	public void sellStock(String symbol,int quantity){
 		for(int i = 0; i < portfolioSize; i++)
 		{
 			if(this.stocksStatus[i].getStockSymbol().equals(symbol))
@@ -201,12 +206,9 @@ public class Portfolio {
 				else //lower then -1 
 				{
 					System.out.println("Cant delete a negative number of quantity");
-					return false;
 				}
-				return true;
 			}
 		}
-		return false;
 	}
 
 	/**
@@ -215,16 +217,16 @@ public class Portfolio {
 	 *
 	 * @param stock the buyStock from this stocks array.
 	 * only buy the stock 
+	 * @throws BalanceException 
 	 */
 
-	public boolean buyStock(String symbol,int quantity){
+	public void buyStock(String symbol,int quantity) throws BalanceException{
 		for(int i = 0; i < portfolioSize; i++)
 		{
 			if(this.stocksStatus[i].getStockSymbol().equals(symbol))
 			{
 				if(quantity == -1)
 				{
-					//float res = getBalance() /(stocksStatus[i].getCurrentAsk());
 					quantity = (int)(getBalance() /(stocksStatus[i].getAsk()));
 					this.stocksStatus[i].setStockQuantity(stocksStatus[i].getStockQuantity()+quantity);
 					updateBalance(-(quantity * this.stocksStatus[i].getAsk()));
@@ -241,18 +243,18 @@ public class Portfolio {
 					}
 
 					else
+					{
 						System.out.println("Not enough balance to complete purchase"); 
+						throw new BalanceException();
+					}
 
 				}
 				else //lower then -1 
 				{
 					System.out.println("Cant delete a negative number of quantity");
-					return false;
 				}
-				return true;
 			}
 		}
-		return false;
 	}
 
 	/**
