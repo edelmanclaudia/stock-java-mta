@@ -2,7 +2,6 @@ package com.mta.claudia.stock.service;
 
 import java.util.Date;
 
-import com.google.appengine.api.modules.ModulesServicePb.StopModuleRequest;
 import com.mta.claudia.stock.model.Portfolio;
 import com.mta.claudia.stock.model.Stock;
 
@@ -59,7 +58,7 @@ public class PortfolioService {
 
 		
 		//myPortfolio.setTitle("<p><center><div style=background-color:pink><h1> Exercise 8 portfolio</h1></div style=background-color:pink></center></p>");
-		myPortfolio.setTitle("Exercise 8 portfolio");
+		myPortfolio.setTitle("Exercise 9 portfolio");
 
 		return myPortfolio;
 	}

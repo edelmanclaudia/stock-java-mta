@@ -119,7 +119,7 @@ public class Portfolio {
 			if(stock.getStockSymbol().equals(stocksStatus[i].getStockSymbol()) )
 			{
 				System.out.println("You own this kind of stock , therefor no need to add the stock!");
-				throw new StockAlreadyExistsException();
+				throw new StockAlreadyExistsException(stock.getStockSymbol());
 			}
 		}
 

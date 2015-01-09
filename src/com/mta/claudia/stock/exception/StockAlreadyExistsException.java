@@ -9,8 +9,8 @@ package com.mta.claudia.stock.exception;
 
 public class StockAlreadyExistsException extends Exception {
 	
-	public StockAlreadyExistsException() {
-		super("Sorry,stock already exist in portfolio");
+	public StockAlreadyExistsException(String symbol) {
+		super("Sorry, Stock " +symbol+ " already exist in portfolio");
 		
 	}
 }

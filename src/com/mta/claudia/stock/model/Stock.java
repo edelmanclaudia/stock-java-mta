@@ -50,7 +50,7 @@ public class Stock {
 		}
 
 		else
-			System.out.println("there isnt stocks to copy");
+			System.out.println("there arent stocks to copy");
 	}
 
 	//getters:

@@ -41,15 +41,7 @@ public class PortfolioServlet extends HttpServlet {
 		} catch (StockNotExistException e4) {
 			 resp.getWriter().println(e4.getMessage());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-
-		
-	//	Portfolio portfolio2 = new Portfolio(portfolio); 
-
-	//	portfolio2.setTitle("<h1>Portfolio 2#</h1>");
-	//	resp.getWriter().println(portfolio2.getHtmlString() + "<br>");
-
 	}
 }
