@@ -5,7 +5,6 @@ import com.mta.claudia.stock.exception.PortfolioFullException;
 import com.mta.claudia.stock.exception.StockAlreadyExistsException;
 import com.mta.claudia.stock.exception.StockNotExistException;
 
-
 /**
  * An instance of this class represents a portfoilio of stocks.
  * @author Claudia Edelman
@@ -21,7 +20,7 @@ public class Portfolio {
 	private StockStatus[] stocksStatus;
 	private int portfolioSize = 0; 
 	private float balance = 0;
-	
+
 
 	//getters
 	public String getTitle() {
@@ -125,7 +124,6 @@ public class Portfolio {
 
 		if(portfolioSize < MAX_PORTFOLIO_SIZE )
 		{
-			//stocksStatus[portfolioSize] = stock;
 			stocksStatus[portfolioSize] = new StockStatus(stock.getStockSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING,0);
 			portfolioSize++;
 		}
@@ -133,9 +131,9 @@ public class Portfolio {
 		{
 			System.out.println("Cant add new stock, portfolio can have only " + portfolioSize + " stocks");
 			throw new PortfolioFullException();
-	
 		}
 	}
+
 	/**
 	 * Remove stock to from stocks array.
 	 * reduce the portfolio size.
@@ -297,16 +295,16 @@ public class Portfolio {
 	 */
 
 	public String getHtmlString(){
-		String getHtmlString = "<p><center><div style=background-color:pink><h1>";
+		String getHtmlString = "<p><center><div style=background-color:FFCCFF><h1>";
 		getHtmlString += getTitle() + "<br>";
-		getHtmlString += "</div style=background-color:pink></center></p>";
-				
+		getHtmlString += "</div style=background-color:FFCCFF></center></p>";
+
 		getHtmlString += "<b> Total Portfolio Value: </b>" + getTotalValue(stocksStatus) + "$  , <b> Total Stocks value: </b>" + getStocksValue(stocksStatus) +"$  , <b> Balance: </b>" + getBalance() + "$ <br><br>";
 
-		getHtmlString += "<br><font color=darkblue><b>Stock Details:</b></font color=dark blue>";
-		getHtmlString += "<br><font color=darkblue><b>______________</b></font color=dark blue><br><br>";
+		getHtmlString += "<br><font color=9900CC><b>Stock Details:</b></font color=9900CC>";
+		getHtmlString += "<br><font color=9900CC><b>______________</b></font color=9900CC><br><br>";
 
-		
+
 		for(int i = 0; i < portfolioSize; i++)
 
 			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocksStatus[i].getHtmlDescription() + " , <b>quantity</b>: " +stocksStatus[i].getStockQuantity()+ "<br><br>";

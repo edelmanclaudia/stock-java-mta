@@ -25,16 +25,7 @@ public class Stock {
 	public Stock(){
 
 	}
-
-	/**
-	 * copy constructor
-	 * @param stocks 
-	 */
-
-	public Stock(Stock stock){
-		this(stock.getStockSymbol(),stock.getAsk(),stock.getBid(),new Date(stock.getDate().getTime()));
-	}
-
+	
 	/**
 	 * constructor
 	 * @param stocks 
@@ -51,6 +42,15 @@ public class Stock {
 
 		else
 			System.out.println("there arent stocks to copy");
+	}
+	
+	/**
+	 * copy constructor
+	 * @param stocks 
+	 */
+
+	public Stock(Stock stock){
+		this(stock.getStockSymbol(),stock.getAsk(),stock.getBid(),new Date(stock.getDate().getTime()));
 	}
 
 	//getters:
@@ -91,7 +91,6 @@ public class Stock {
 	
 	/**
 	 * Returns the description stocks.
-	 * 
 	 *
 	 * @param present the stock and print the stock description
 	 * * @return the getHtmlDescription.
@@ -99,7 +98,7 @@ public class Stock {
 
 	public String getHtmlDescription(){
 		String stockHtmlDetailsString = "<b>Stock symbol</b>: " +getStockSymbol()+ " , <b>ask</b>: " +getAsk()+ " , <b>bid</b>: "
-				+getBid()+ " , <b>date</b>: " +new SimpleDateFormat("dd-MM-yyyy").format(date); //+date.getDate()+ "/" +date.getMonth()+ "/" +date.getYear();
+				+getBid()+ " , <b>date</b>: " +new SimpleDateFormat("dd-MM-yyyy").format(date);
 		return stockHtmlDetailsString;
 	}
 }
