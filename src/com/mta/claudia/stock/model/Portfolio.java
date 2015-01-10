@@ -172,44 +172,6 @@ public class Portfolio {
 	}	
 
 	/**
-	 * Sell stock to from bool val if stock was found true else false.
-	 * reduce the portfolio size.
-	 *
-	 * @param stock the sellStock from this stocks array.
-	 * only sell the stock ,dosent remove! 
-	 */
-
-	public void sellStock(String symbol,int quantity){
-		for(int i = 0; i < portfolioSize; i++)
-		{
-			if(this.stocksStatus[i].getStockSymbol().equals(symbol))
-			{
-				if(quantity == -1)
-				{
-					updateBalance(stocksStatus[i].getStockQuantity() * this.stocksStatus[i].getBid());
-					System.out.println(stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were sold"); 
-					this.stocksStatus[i].setStockQuantity(0);
-				}
-
-				else if(quantity > stocksStatus[i].getStockQuantity())
-					System.out.println("Not enough stocks to sell");
-
-				else if(quantity > 0)
-				{
-					this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() - quantity);
-					updateBalance(quantity * this.stocksStatus[i].getBid());
-					System.out.println(quantity + " Stocks of " +symbol+ " were sold"); 
-				}
-
-				else //lower then -1 
-				{
-					System.out.println("Cant delete a negative number of quantity");
-				}
-			}
-		}
-	}
-
-	/**
 	 * Buy stock to from bool val if stock was found true else false.
 	 * reduce the portfolio size.
 	 *
@@ -256,9 +218,45 @@ public class Portfolio {
 	}
 
 	/**
-	 * Returns the total value of stocks in portfolio.
-	 * 
+	 * Sell stock to from bool val if stock was found true else false.
+	 * reduce the portfolio size.
 	 *
+	 * @param stock the sellStock from this stocks array.
+	 * only sell the stock ,dosent remove! 
+	 */
+
+	public void sellStock(String symbol,int quantity){
+		for(int i = 0; i < portfolioSize; i++)
+		{
+			if(this.stocksStatus[i].getStockSymbol().equals(symbol))
+			{
+				if(quantity == -1)
+				{
+					updateBalance(stocksStatus[i].getStockQuantity() * this.stocksStatus[i].getBid());
+					System.out.println(stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were sold"); 
+					this.stocksStatus[i].setStockQuantity(0);
+				}
+
+				else if(quantity > stocksStatus[i].getStockQuantity())
+					System.out.println("Not enough stocks to sell");
+
+				else if(quantity > 0)
+				{
+					this.stocksStatus[i].setStockQuantity(this.stocksStatus[i].getStockQuantity() - quantity);
+					updateBalance(quantity * this.stocksStatus[i].getBid());
+					System.out.println(quantity + " Stocks of " +symbol+ " were sold"); 
+				}
+
+				else //lower then -1 
+				{
+					System.out.println("Cant delete a negative number of quantity");
+				}
+			}
+		}
+	}
+
+	/**
+	 * Returns the total value of stocks in portfolio.	
 	 * @param runs on the stocks array and add the value to the total 
 	 * * @return total value stock.
 	 */
@@ -289,7 +287,6 @@ public class Portfolio {
 	/**
 	 * Returns the description portfolio.
 	 * 
-	 *
 	 * @param runs on the stocks array and print the stock description
 	 * * @return the getHtmlString.
 	 */
