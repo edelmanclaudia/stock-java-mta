@@ -9,7 +9,9 @@ package com.mta.claudia.stock.exception;
 
 public class BalanceException extends Exception {
 	
-	public BalanceException() {
-		super("Not enough balance to complete purchase");
+	private static final long serialVersionUID = 1L;
+
+	public BalanceException(float balance) {
+		super("Not enough balance to complete purchase, your balance is" +balance);
 	}
 }

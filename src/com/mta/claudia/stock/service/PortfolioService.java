@@ -27,7 +27,6 @@ public class PortfolioService {
 
 		myPortfolio.setBalance(10000); // or anther option to updateBalanvc(10000)
 
-		//setting the date
 		date.setMonth(11);
 		date.setDate(15);
 		date.setYear(114);

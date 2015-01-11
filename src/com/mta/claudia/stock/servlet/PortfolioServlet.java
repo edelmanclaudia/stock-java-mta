@@ -27,8 +27,8 @@ public class PortfolioServlet extends HttpServlet {
 		resp.setContentType("text/html");
 
 		PortfolioService portfolioService = new PortfolioService(); 
-		
 		Portfolio portfolio;
+		
 		try {
 			portfolio = portfolioService.getPortfolio();
 			resp.getWriter().println(portfolio.getHtmlString() + "<br>");
@@ -41,7 +41,7 @@ public class PortfolioServlet extends HttpServlet {
 		} catch (StockNotExistException e4) {
 			 resp.getWriter().println(e4.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		} 
 	}
 }

@@ -130,7 +130,7 @@ public class Portfolio {
 		else
 		{
 			System.out.println("Cant add new stock, portfolio can have only " + portfolioSize + " stocks");
-			throw new PortfolioFullException();
+			throw new PortfolioFullException(getPortfolioSize());
 		}
 	}
 
@@ -168,7 +168,7 @@ public class Portfolio {
 			}
 		}
 		System.out.println("The stock " +stockSymbol+ " dosent exist in the portfolio");
-		throw new StockNotExistException();
+		throw new StockNotExistException(stockSymbol);
 	}	
 
 	/**
@@ -204,8 +204,8 @@ public class Portfolio {
 
 					else
 					{
-						System.out.println("Not enough balance to complete purchase"); 
-						throw new BalanceException();
+						System.out.println("Not enough balance to complete purchase");
+						throw new BalanceException(getBalance());
 					}
 
 				}

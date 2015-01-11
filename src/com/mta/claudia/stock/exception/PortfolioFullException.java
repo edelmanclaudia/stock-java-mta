@@ -9,7 +9,9 @@ package com.mta.claudia.stock.exception;
 
 public class PortfolioFullException extends Exception {
 	
-	public PortfolioFullException() {
-		super("Cant add any more stocks! you have reached the max size of portfolio");
+	private static final long serialVersionUID = 1L;
+
+	public PortfolioFullException(int maxSize) {
+		super("Cant add any more stocks! you have reached the max size (" +maxSize+ ") of portfolio");
 	}
 }
