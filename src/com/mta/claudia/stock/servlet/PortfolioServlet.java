@@ -28,18 +28,18 @@ public class PortfolioServlet extends HttpServlet {
 
 		PortfolioService portfolioService = new PortfolioService(); 
 		Portfolio portfolio;
-		
+
 		try {
 			portfolio = portfolioService.getPortfolio();
 			resp.getWriter().println(portfolio.getHtmlString() + "<br>");
 		} catch (BalanceException e1) {
-			 resp.getWriter().println(e1.getMessage());
+			resp.getWriter().println(e1.getMessage());
 		} catch (PortfolioFullException e2) {
-			 resp.getWriter().println(e2.getMessage());
+			resp.getWriter().println(e2.getMessage());
 		} catch (StockAlreadyExistsException e3) {
-			 resp.getWriter().println(e3.getMessage());
+			resp.getWriter().println(e3.getMessage());
 		} catch (StockNotExistException e4) {
-			 resp.getWriter().println(e4.getMessage());
+			resp.getWriter().println(e4.getMessage());
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} 

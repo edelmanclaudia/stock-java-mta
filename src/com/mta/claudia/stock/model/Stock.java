@@ -25,7 +25,7 @@ public class Stock {
 	public Stock(){
 
 	}
-	
+
 	/**
 	 * constructor
 	 * @param stocks 
@@ -43,7 +43,7 @@ public class Stock {
 		else
 			System.out.println("there arent stocks to copy");
 	}
-	
+
 	/**
 	 * copy constructor
 	 * @param stocks 
@@ -70,7 +70,7 @@ public class Stock {
 		return date;
 	}
 
-	
+
 	//setters:
 	public void setStockSymbol (String symbol){
 		stockSymbol = symbol;
@@ -88,7 +88,7 @@ public class Stock {
 		date = newDate;
 	}
 
-	
+
 	/**
 	 * Returns the description stocks.
 	 *

@@ -8,11 +8,11 @@ package com.mta.claudia.stock.exception;
  */
 
 public class StockAlreadyExistsException extends Exception {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public StockAlreadyExistsException(String symbol) {
 		super("Sorry, Stock " +symbol+ " already exist in portfolio");
-		
+
 	}
 }

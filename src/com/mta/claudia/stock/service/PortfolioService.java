@@ -38,7 +38,7 @@ public class PortfolioService {
 		myPortfolio.addStock(stock1);
 		myPortfolio.addStock(stock2);
 		myPortfolio.addStock(stock3);
-		
+
 		myPortfolio.addStock(stock3);
 
 		myPortfolio.buyStock("PIH", 20);
