@@ -1,47 +1,38 @@
 package com.mta.claudia.stock.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.http.HttpServlet;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mta.claudia.stock.exception.BalanceException;
-import com.mta.claudia.stock.exception.PortfolioFullException;
-import com.mta.claudia.stock.exception.StockAlreadyExistsException;
-import com.mta.claudia.stock.exception.StockNotExistException;
-import com.mta.claudia.stock.model.Portfolio;
-import com.mta.claudia.stock.service.PortfolioService;
+import com.mta.claudia.stock.dto.PortfolioDto;
+import com.mta.claudia.stock.dto.PortfolioTotalStatus;
+import com.mta.claudia.stock.model.StockStatus;
 
-/**
- * An instance of this class represents a Portfolio Servlet.
- * @author Claudia Edelman
- * @since 2014
- * date 2/12/2014
- */
+public class PortfolioServlet extends AbstractAlgoServlet {
 
-@SuppressWarnings("serial")
-public class PortfolioServlet extends HttpServlet {
-	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException{
-		resp.setContentType("text/html");
+	private static final long serialVersionUID = 1L;
 
-		PortfolioService portfolioService = new PortfolioService(); 
-		Portfolio portfolio;
-
-		try {
-			portfolio = portfolioService.getPortfolio();
-			resp.getWriter().println(portfolio.getHtmlString() + "<br>");
-		} catch (BalanceException e1) {
-			resp.getWriter().println(e1.getMessage());
-		} catch (PortfolioFullException e2) {
-			resp.getWriter().println(e2.getMessage());
-		} catch (StockAlreadyExistsException e3) {
-			resp.getWriter().println(e3.getMessage());
-		} catch (StockNotExistException e4) {
-			resp.getWriter().println(e4.getMessage());
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		} 
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		resp.setContentType("application/json");
+		
+		PortfolioTotalStatus[] totalStatus = portfolioService.getPortfolioTotalStatus();
+		StockStatus[] stockStatusArray = portfolioService.getPortfolio().getStocksStatus();
+		List<StockStatus> stockStatusList = new ArrayList<>();
+		for (StockStatus ss : stockStatusArray) {
+			if(ss != null)
+				stockStatusList.add(ss);
+		}
+		
+		PortfolioDto pDto = new PortfolioDto();
+		pDto.setTitle(portfolioService.getPortfolio().getTitle());
+		pDto.setTotalStatus(totalStatus);
+		pDto.setStockTable(stockStatusList);
+		resp.getWriter().print(withNullObjects().toJson(pDto));
 	}
 }

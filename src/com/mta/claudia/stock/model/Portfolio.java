@@ -1,9 +1,11 @@
 package com.mta.claudia.stock.model;
 
+import java.util.List;
+
 import com.mta.claudia.stock.exception.BalanceException;
 import com.mta.claudia.stock.exception.PortfolioFullException;
 import com.mta.claudia.stock.exception.StockAlreadyExistsException;
-import com.mta.claudia.stock.exception.StockNotExistException;
+import com.mta.claudia.stock.exception.StockNotExistsException;
 
 /**
  * An instance of this class represents a portfoilio of stocks.
@@ -13,7 +15,7 @@ import com.mta.claudia.stock.exception.StockNotExistException;
  */
 
 public class Portfolio {
-	private final static int MAX_PORTFOLIO_SIZE = 5;
+	public final static int SIZE = 5;
 	public static enum ALGO_RECOMMENDATION{DO_NOTHING,BUY,SELL};
 
 	private String title;
@@ -65,15 +67,29 @@ public class Portfolio {
 		this.balance += amount;
 	}
 
+	
 	/**
 	 * constructor
 	 * @param portfolio allocates instances
 	 */
 
 	public Portfolio(){
-		setStocksStatus(new StockStatus[MAX_PORTFOLIO_SIZE]);
+		setStocksStatus(new StockStatus[SIZE]);
 	}
 
+	/**
+	 * used by datastoresevice
+	 * @param portfolio
+	 */
+
+	public Portfolio(List<StockStatus> stockStatuses){
+		this();
+		
+		//stockStatuses.toArray(this.stocksStatus);
+		for(int i=0; i < portfolioSize; i++)
+			this.stocksStatus[i] = stockStatuses.get(i);
+	}
+	
 	/**
 	 * constructor
 	 * @param portfolio
@@ -111,7 +127,7 @@ public class Portfolio {
 	 * 
 	 */
 
-	public void addStock(Stock stock) throws Exception {
+	public void addStock(Stock stock) throws StockAlreadyExistsException,PortfolioFullException {
 
 		for(int i = 0; i < portfolioSize; i++)
 		{
@@ -122,7 +138,7 @@ public class Portfolio {
 			}
 		}
 
-		if(portfolioSize < MAX_PORTFOLIO_SIZE )
+		if(portfolioSize < SIZE )
 		{
 			stocksStatus[portfolioSize] = new StockStatus(stock.getStockSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING,0);
 			portfolioSize++;
@@ -130,7 +146,7 @@ public class Portfolio {
 		else
 		{
 			System.out.println("Cant add new stock, portfolio can have only " + portfolioSize + " stocks");
-			throw new PortfolioFullException(getPortfolioSize());
+			throw new PortfolioFullException();
 		}
 	}
 
@@ -143,7 +159,7 @@ public class Portfolio {
 	 * @throws StockNotExistException 
 	 */
 
-	public void removeStock(String stockSymbol) throws StockNotExistException{
+	public void removeStock(String stockSymbol) throws StockNotExistsException{
 		for(int index = 0; index < portfolioSize; index++)
 		{
 			if(stockSymbol.equals(this.stocksStatus[index].getStockSymbol()))
@@ -168,7 +184,7 @@ public class Portfolio {
 			}
 		}
 		System.out.println("The stock " +stockSymbol+ " dosent exist in the portfolio");
-		throw new StockNotExistException(stockSymbol);
+		throw new StockNotExistsException(stockSymbol);
 	}	
 
 	/**
@@ -205,7 +221,7 @@ public class Portfolio {
 					else
 					{
 						System.out.println("Not enough balance to complete purchase");
-						throw new BalanceException(getBalance());
+						throw new BalanceException();
 					}
 
 				}
@@ -307,5 +323,14 @@ public class Portfolio {
 			getHtmlString += "<b>Stock</b> " + (i+1) + ": " +stocksStatus[i].getHtmlDescription() + " , <b>quantity</b>: " +stocksStatus[i].getStockQuantity()+ "<br><br>";
 
 		return getHtmlString;
+	}
+
+	public StockStatus findBySymbol(String symbol) {
+		for(int i = 0; i < portfolioSize; i++)
+		{
+			if(this.stocksStatus[i].getStockSymbol().equals(symbol))
+				return this.stocksStatus[i];
+		}
+		return null;
 	}
 }

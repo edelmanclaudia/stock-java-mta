@@ -60,6 +60,20 @@ public class StockStatus extends Stock {
 	}
 
 	/**
+	 * constructor
+	 * @param StockStatus
+	 */
+
+	public StockStatus(){
+		this.stockSymbol = "";
+		this.bid = 0;
+		this.ask = 0;
+		this.date = null;
+		this.recommendation = ALGO_RECOMMENDATION.DO_NOTHING;
+		this.stockQuantity = 0;
+	}
+	
+	/**
 	 * copy constructor
 	 * @param StockStatus
 	 */

@@ -1,17 +1,15 @@
 package com.mta.claudia.stock.exception;
 
-/**
- * An exception of dviation of balance .
- * @author Claudia Edelman
- * @since 2015
- * date 8/1/2015
- */
-
 public class BalanceException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-
-	public BalanceException(float balance) {
-		super("Not enough balance to complete purchase, your balance is" +balance);
+	
+	public BalanceException() {
+		super("Out of balance!");
 	}
+	
+	public BalanceException(String message) {
+		super(message);
+	}
+
 }
