@@ -84,9 +84,8 @@ public class Portfolio {
 
 	public Portfolio(List<StockStatus> stockStatuses){
 		this();
-		
-		//stockStatuses.toArray(this.stocksStatus);
-		for(int i=0; i < portfolioSize; i++)
+
+		for(int i = 0; i < portfolioSize; i++)
 			this.stocksStatus[i] = stockStatuses.get(i);
 	}
 	
@@ -328,8 +327,11 @@ public class Portfolio {
 	public StockStatus findBySymbol(String symbol) {
 		for(int i = 0; i < portfolioSize; i++)
 		{
-			if(this.stocksStatus[i].getStockSymbol().equals(symbol))
-				return this.stocksStatus[i];
+			if(this.stocksStatus[i] != null)
+			{
+				if(this.stocksStatus[i].getStockSymbol().equals(symbol))	
+					return this.stocksStatus[i];
+			}	
 		}
 		return null;
 	}

@@ -1,7 +1,5 @@
 package com.mta.claudia.stock.service;
 
-import com.mta.claudia.stock.exception.BalanceException;
-import com.mta.claudia.stock.exception.StockAlreadyExistsException;
 import com.mta.claudia.stock.model.Portfolio;
 import com.mta.claudia.stock.model.Portfolio.ALGO_RECOMMENDATION;
 import com.mta.claudia.stock.model.Stock;
@@ -45,11 +43,6 @@ public class DatastoreService {
 	private static final String STOCK_QUANTITY = "stockQuantity";
 	private static final String NAMESPACE_STOCK = "stock";
 	private static final String NAMESPACE_STOCK_SYMBOL = "stock_symbol";
-
-	private static final String NAMESPACE_ACCOUNT = "account";
-	private static final String BALANCE = "balance";
-	private static final String PASSWORD = "password";
-	private static final String USERNAME = "username";
 
 	private static final String NAMESPACE_PORTFOLIO = "portfolio";
 	private static final String TITLE = "title";
