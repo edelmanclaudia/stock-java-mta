@@ -32,24 +32,10 @@ public abstract class AbsAnimal implements Animal{
 	public void setWeight(float weight){
 		this.weight = weight;
 	}
-	/*	
-	public AbsAnimal(){
-		this.name = " ";
-		this.age = 0;
-		this.weight = 0;
-	}*/
-
+	
 	public AbsAnimal(String name,int age,float weight){
 		this.setName(name);
 		this.setAge(age);
 		this.setWeight(weight);
 	}
-	
-	/*public AbsAnimal(AbsAnimal a){
-		setName(a.name);
-		setAge(a.age);
-		setWeight(a.weight);
-	}*/
-	
-
 }

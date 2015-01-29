@@ -11,15 +11,9 @@ public abstract class AbsAnimalMilk extends AbsAnimal{
 	public void setMilk(float milk){
 		this.milk = milk;
 	}
-
 	
 	public AbsAnimalMilk(String name,int age,float weight,float milk) {
 		super(name,age,weight);
 		this.milk = milk;
 	}
-	
-	/*public AbsAnimalMilk(AbsAnimal a) {
-		super(a);
-		this.milk = 0;
-	}*/
 }
