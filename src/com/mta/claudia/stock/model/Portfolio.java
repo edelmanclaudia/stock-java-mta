@@ -324,15 +324,15 @@ public class Portfolio {
 		return getHtmlString;
 	}
 
-	public StockStatus findBySymbol(String symbol) {
+	public StockStatus findBySymbol(String symbol) throws StockNotExistsException {
 		for(int i = 0; i < portfolioSize; i++)
 		{
 			if(this.stocksStatus[i] != null)
 			{
-				if(this.stocksStatus[i].getStockSymbol().equals(symbol))	
+				if(this.stocksStatus[i].getStockSymbol().toLowerCase().equals(symbol))	
 					return this.stocksStatus[i];
 			}	
 		}
-		return null;
+		throw new StockNotExistsException(symbol);
 	}
 }
