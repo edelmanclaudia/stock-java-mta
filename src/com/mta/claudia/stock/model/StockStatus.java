@@ -51,7 +51,7 @@ public class StockStatus extends Stock {
 	 */
 
 	public StockStatus(String symbol, float bid, float ask, Date date, ALGO_RECOMMENDATION recom, int stockQuantity){
-		this.stockSymbol = symbol;
+		this.symbol = symbol;
 		this.bid = bid;
 		this.ask = ask;
 		this.date = date;
@@ -65,7 +65,7 @@ public class StockStatus extends Stock {
 	 */
 
 	public StockStatus(){
-		this.stockSymbol = "";
+		this.symbol = "";
 		this.bid = 0;
 		this.ask = 0;
 		this.date = null;
@@ -79,7 +79,7 @@ public class StockStatus extends Stock {
 	 */
 
 	public StockStatus(StockStatus stockStatus){
-		this.stockSymbol = stockStatus.stockSymbol;
+		this.symbol = stockStatus.symbol;
 		this.ask = stockStatus.ask;
 		this.bid = stockStatus.bid;
 		this.date = new Date(stockStatus.date.getTime());

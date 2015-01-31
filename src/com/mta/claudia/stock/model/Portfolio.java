@@ -85,7 +85,7 @@ public class Portfolio {
 	public Portfolio(List<StockStatus> stockStatuses){
 		this();
 
-		for(int i = 0; i < portfolioSize; i++)
+		for(int i = 0; i < stockStatuses.size(); i++)
 			this.stocksStatus[i] = stockStatuses.get(i);
 	}
 	

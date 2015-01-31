@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class Stock {
 
-	protected String stockSymbol;
+	protected String symbol;
 	protected float ask;
 	protected float bid;
 	protected Date date;
@@ -55,7 +55,7 @@ public class Stock {
 
 	//getters:
 	public String getStockSymbol (){
-		return stockSymbol;
+		return symbol;
 	}
 
 	public float getAsk (){
@@ -73,7 +73,7 @@ public class Stock {
 
 	//setters:
 	public void setStockSymbol (String symbol){
-		stockSymbol = symbol;
+		symbol = symbol;
 	}
 
 	public void setAsk (float newAsk){

@@ -2,7 +2,7 @@ package com.mta.claudia.exam;
 
 public abstract class AbsAnimalMilk extends AbsAnimal{
 	
-	protected float milk;
+	private float milk;
 
 	public float getMilk(){
 		return this.milk;
