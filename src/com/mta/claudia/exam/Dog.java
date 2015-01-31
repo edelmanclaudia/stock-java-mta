@@ -1,6 +1,6 @@
 package com.mta.claudia.exam;
 
-public class Dog extends AbsAnimal {
+public final class Dog extends AbsAnimal{
 
 	public Dog(String name,int age,float weight) {
 		super(name,age,weight);

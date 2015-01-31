@@ -37,6 +37,10 @@ public class Portfolio {
 		return stocksStatus;
 	}
 
+	public StockStatus[] getStocks() {
+		return stocksStatus;
+	}
+	
 	public float getBalance() {
 		return balance;
 	}
@@ -61,13 +65,17 @@ public class Portfolio {
 	/**
 	 * update the current balance
 	 * @param get an amount to add to the balance 
+	 * @throws BalanceException 
 	 */
 
-	public void updateBalance(float amount){
-		this.balance += amount;
+	public void updateBalance(float amount) throws BalanceException{
+		if(balance + amount < 0)
+			throw new BalanceException();
+		else
+			this.balance += amount;
 	}
 
-	
+
 	/**
 	 * constructor
 	 * @param portfolio allocates instances
@@ -84,11 +92,16 @@ public class Portfolio {
 
 	public Portfolio(List<StockStatus> stockStatuses){
 		this();
+		int arraySize = stockStatuses.size();
+		setPortfolioSize(arraySize);
 
-		for(int i = 0; i < stockStatuses.size(); i++)
+		if(stockStatuses.size() > SIZE)
+			arraySize = SIZE;
+
+		for(int i = 0; i < arraySize; i++)
 			this.stocksStatus[i] = stockStatuses.get(i);
 	}
-	
+
 	/**
 	 * constructor
 	 * @param portfolio
@@ -130,16 +143,16 @@ public class Portfolio {
 
 		for(int i = 0; i < portfolioSize; i++)
 		{
-			if(stock.getStockSymbol().equals(stocksStatus[i].getStockSymbol()) )
+			if(stock.getSymbol().equals(this.stocksStatus[i].getSymbol()) )
 			{
 				System.out.println("You own this kind of stock , therefor no need to add the stock!");
-				throw new StockAlreadyExistsException(stock.getStockSymbol());
+				throw new StockAlreadyExistsException(stock.getSymbol());
 			}
 		}
 
 		if(portfolioSize < SIZE )
 		{
-			stocksStatus[portfolioSize] = new StockStatus(stock.getStockSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING,0);
+			stocksStatus[portfolioSize] = new StockStatus(stock.getSymbol(),stock.getBid(),stock.getAsk(),stock.getDate(),ALGO_RECOMMENDATION.DO_NOTHING,0);
 			portfolioSize++;
 		}
 		else
@@ -155,15 +168,16 @@ public class Portfolio {
 	 *
 	 * @param stock the removeStock from this stocks array.
 	 * delete the stock by the index place and moves the other stock to the left 
+	 * @throws BalanceException 
 	 * @throws StockNotExistException 
 	 */
 
-	public void removeStock(String stockSymbol) throws StockNotExistsException{
+	public void removeStock(String stockSymbol) throws StockNotExistsException, BalanceException{
 		for(int index = 0; index < portfolioSize; index++)
 		{
-			if(stockSymbol.equals(this.stocksStatus[index].getStockSymbol()))
+			if(stockSymbol.equals(this.stocksStatus[index].getSymbol()))
 			{
-				sellStock(this.stocksStatus[index].getStockSymbol(),this.stocksStatus[index].getStockQuantity());
+				sellStock(this.stocksStatus[index].getSymbol(),this.stocksStatus[index].getStockQuantity());
 
 				this.stocksStatus[index] = null;
 
@@ -198,7 +212,7 @@ public class Portfolio {
 	public void buyStock(String symbol,int quantity) throws BalanceException{
 		for(int i = 0; i < portfolioSize; i++)
 		{
-			if(this.stocksStatus[i].getStockSymbol().equals(symbol))
+			if(this.stocksStatus[i].getSymbol().equals(symbol))
 			{
 				if(quantity == -1)
 				{
@@ -238,12 +252,13 @@ public class Portfolio {
 	 *
 	 * @param stock the sellStock from this stocks array.
 	 * only sell the stock ,dosent remove! 
+	 * @throws BalanceException 
 	 */
 
-	public void sellStock(String symbol,int quantity){
+	public void sellStock(String symbol,int quantity) throws BalanceException{
 		for(int i = 0; i < portfolioSize; i++)
 		{
-			if(this.stocksStatus[i].getStockSymbol().equals(symbol))
+			if(this.stocksStatus[i].getSymbol().equals(symbol))
 			{
 				if(quantity == -1)
 				{
@@ -324,15 +339,16 @@ public class Portfolio {
 		return getHtmlString;
 	}
 
-	public StockStatus findBySymbol(String symbol) throws StockNotExistsException {
+	public StockStatus findBySymbol(String symbol) {
 		for(int i = 0; i < portfolioSize; i++)
 		{
 			if(this.stocksStatus[i] != null)
 			{
-				if(this.stocksStatus[i].getStockSymbol().toLowerCase().equals(symbol))	
+				if(this.stocksStatus[i].getSymbol().equalsIgnoreCase(symbol))	
 					return this.stocksStatus[i];
 			}	
-		}
-		throw new StockNotExistsException(symbol);
+		}	
+		return null;
+
 	}
 }

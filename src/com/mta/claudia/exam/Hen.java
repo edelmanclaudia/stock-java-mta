@@ -4,17 +4,9 @@ public class Hen extends AbsAnimal{
 	
 	protected int numOfEggs;
 	
-	public int getNumOfEggs(){
-		return this.numOfEggs;
-	}
-	
-	public void setNumOfEggs(int num){
-		this.numOfEggs = num;
-	}
-	
-	public Hen(String name,int age,float weight,int getNumOfEggs) {
+	public Hen(String name,int age,float weight,int numOfEggs) {
 		super(name,age,weight);
-		this.numOfEggs = getNumOfEggs;
+		this.numOfEggs = numOfEggs;
 	}
 	
 	public void walk(){

@@ -2,6 +2,7 @@ package com.mta.claudia.exam;
 
 public class Sheep extends AbsAnimalMilk{
 	
+	//c'tor
 	public Sheep(String name,int age,float weight,float milk) {
 		super(name,age,weight,milk);
 	}

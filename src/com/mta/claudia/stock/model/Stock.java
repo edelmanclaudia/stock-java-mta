@@ -50,11 +50,11 @@ public class Stock {
 	 */
 
 	public Stock(Stock stock){
-		this(stock.getStockSymbol(),stock.getAsk(),stock.getBid(),new Date(stock.getDate().getTime()));
+		this(stock.getSymbol(),stock.getAsk(),stock.getBid(),new Date(stock.getDate().getTime()));
 	}
 
 	//getters:
-	public String getStockSymbol (){
+	public String getSymbol (){
 		return symbol;
 	}
 
@@ -73,7 +73,7 @@ public class Stock {
 
 	//setters:
 	public void setStockSymbol (String symbol){
-		symbol = symbol;
+		this.symbol = symbol;
 	}
 
 	public void setAsk (float newAsk){
@@ -97,7 +97,7 @@ public class Stock {
 	 */
 
 	public String getHtmlDescription(){
-		String stockHtmlDetailsString = "<b>Stock symbol</b>: " +getStockSymbol()+ " , <b>ask</b>: " +getAsk()+ " , <b>bid</b>: "
+		String stockHtmlDetailsString = "<b>Stock symbol</b>: " +getSymbol()+ " , <b>ask</b>: " +getAsk()+ " , <b>bid</b>: "
 				+getBid()+ " , <b>date</b>: " +new SimpleDateFormat("dd-MM-yyyy").format(date);
 		return stockHtmlDetailsString;
 	}

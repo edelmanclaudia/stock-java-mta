@@ -2,54 +2,45 @@ package com.mta.claudia.exam;
 
 public class Farm {
 
+	public final static int SIZE = 5;
+
 	private static float sum;
 
-	public final static int SIZE = 5;
-	//public enum Animal1{cow,sheep,dog,hen};
-	
 	static AbsAnimal[] animalArray = new AbsAnimal[SIZE];
 
-	
-	
-	public static void Farm(){
-		//animalArray = new AbsAnimal[SIZE];
+	public static void createAnArrayOfAnimal(){
+
 		animalArray[0] = new Cow("milka",2,2,2);
 		animalArray[1] = new Dog ("jo",2,2);
 		animalArray[2] = new Hen ("kity",2,2,2);
 		animalArray[3] = new Sheep ("doly",2,2,2);
 		animalArray[4] = new Cow("loly",2,2,2);
 
+		print(animalArray);
+
 	}
 
-	public static  void fuck(){
-		Farm();
-		
+	public static void print(AbsAnimal []animalArray){
 		for(int i = 0; i < SIZE; i++)
 		{
-			System.out.println("Name: " + animalArray[i].getName() + " ,Age" + animalArray[i].getAge());
-			
+			System.out.println("Name: " + animalArray[i].name + " ,Age: " + animalArray[i].age);
+
 			animalArray[i].walk();
-			
-			if(animalArray[i] instanceof AbsAnimalMilk)
-			//if((Animal1.cow) || (Animal1.sheep))
-			{
-				sum += ((AbsAnimalMilk) animalArray[i]).getMilk();
+		}
+	}
+
+	public void sumOfMilk(AbsAnimal []animalArray){	
+		for(int i = 0; i < SIZE; i++)
+		{
+			if(animalArray[i] instanceof AbsAnimalMilk){
+
+				sum += ((AbsAnimalMilk) animalArray[i]).milk;
 				System.out.println("Total farm milk capacity is " + (int)sum + " letters");
 			}
 		}
 	}
-	
-	public static void main (String []args)
-	{		
-		fuck();
-		
-		((Hen)animalArray[2]).getNumOfEggs();
-		
-		//Hen abs = new AbsAnimal("h",2,2,2);  
-				
-		
-		
-		System.out.println("yes i can fuck " + animalArray[0].getName());
+
+	public static void main (String []args){		
+		createAnArrayOfAnimal();
 	}
 }
-

@@ -1,5 +1,6 @@
 package com.mta.claudia.stock.service;
 
+import com.mta.claudia.stock.exception.BalanceException;
 import com.mta.claudia.stock.model.Portfolio;
 import com.mta.claudia.stock.model.Portfolio.ALGO_RECOMMENDATION;
 import com.mta.claudia.stock.model.Stock;
@@ -106,7 +107,7 @@ public class DatastoreService {
 			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
-	
+
 	public void saveStock(StockStatus stock) {
 		try {
 			com.google.appengine.api.datastore.DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -179,7 +180,7 @@ public class DatastoreService {
 		Key key = KeyFactory.createKey(NAMESPACE_PORTFOLIO, 1);
 		try {
 			Entity entity = datastore.get(key);
-			
+
 			@SuppressWarnings("unchecked")
 			List<String> symbolArray = (List<String>) entity.getProperty(SYMBOL_LIST);
 			List<StockStatus> stockStatuses = new ArrayList<StockStatus>();
@@ -188,13 +189,19 @@ public class DatastoreService {
 					List<StockStatus> stockHistory = getStockHistory(symbol, 30);
 					stockStatuses.add(stockHistory.get(0));
 				}
-				
+
 				portfolio = new Portfolio(stockStatuses);
 			}else {
 				portfolio = new Portfolio();
 			}
-			
+
 			portfolio.setTitle((String)entity.getProperty(TITLE));
+			try {
+				portfolio.updateBalance(((Double)entity.getProperty(PORTFOLIO_BALANCE)).floatValue());
+			} 
+			catch (BalanceException e) {
+				//won't never happen
+			}
 
 		} catch (EntityNotFoundException e) {
 			//no account details found - create a new object and store it to db.
@@ -217,19 +224,20 @@ public class DatastoreService {
 	 */
 
 	public void updatePortfolio(Portfolio portfolio) {
-        updateEntity(portfolioToEntity(portfolio));
-        
-        List<StockStatus> stockList = new ArrayList<StockStatus>();
-        StockStatus[] array = portfolio.getStocksStatus();
-        
-        for (StockStatus stockStatus : array) {
-            if(stockStatus != null) {
-                stockList.add(stockStatus);
-            }
-        }
-        
-        updateStocks(stockList);
-    }
+
+		updateEntity(portfolioToEntity(portfolio));
+
+		StockStatus[] array = portfolio.getStocksStatus();
+		ArrayList<StockStatus> arr = new ArrayList<StockStatus>();
+
+		for (StockStatus stockStatus : array) {
+			if(stockStatus != null) {
+				arr.add(stockStatus);
+			}
+		}
+
+		updateStocks(arr);
+	}
 
 	private void updateEntity(Entity entity) {
 		com.google.appengine.api.datastore.DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -248,19 +256,19 @@ public class DatastoreService {
 
 		return ret;
 	}
-	
+
 	private Entity stockToEntity(StockStatus stock) {
 		Key parent = KeyFactory.createKey("date", stock.getDate().getTime());
-		Key key = KeyFactory.createKey(parent, NAMESPACE_STOCK, stock.getStockSymbol());
+		Key key = KeyFactory.createKey(parent, NAMESPACE_STOCK, stock.getSymbol());
 
 		Entity entity = new Entity(key);
-		entity.setProperty(SYMBOL, stock.getStockSymbol());
+		entity.setProperty(SYMBOL, stock.getSymbol());
 		entity.setProperty(ASK, stock.getAsk());
 		entity.setProperty(BID, stock.getBid());
 		entity.setProperty(DAY, stock.getDate());
 		entity.setProperty(STOCK_QUANTITY, stock.getStockQuantity());
 		entity.setProperty(RECOMMENDATION, stock.getRecommendation().name());
-		
+
 		return entity;
 	}
 
@@ -275,17 +283,17 @@ public class DatastoreService {
 
 			Stock stock = stocks[i];
 			if(stock != null)
-				symbols.add(stock.getStockSymbol());
+				symbols.add(stock.getSymbol());
 		}
 
 		entity.setProperty(SYMBOL_LIST, symbols);		
 		return entity;
 	}
-	
+
 	private void updateStocks(List<StockStatus> stockList) {
 		com.google.appengine.api.datastore.DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		
-		
+
+
 		for (StockStatus stockStatus : stockList) {
 			updateStock(stockStatus);
 		}
@@ -301,12 +309,12 @@ public class DatastoreService {
 			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
-	
+
 	private void updateStock(StockStatus stockStatus) {
 
 		com.google.appengine.api.datastore.DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-		Filter fSymbol = new FilterPredicate(SYMBOL, FilterOperator.EQUAL, stockStatus.getStockSymbol());
+		Filter fSymbol = new FilterPredicate(SYMBOL, FilterOperator.EQUAL, stockStatus.getSymbol());
 		final long oneDay = TimeUnit.DAYS.toMillis(1);
 		final long daysAgo = System.currentTimeMillis() - oneDay*30;
 		Filter fdays = new FilterPredicate(DAY, FilterOperator.GREATER_THAN_OR_EQUAL, daysAgo);

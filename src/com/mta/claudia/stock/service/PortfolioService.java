@@ -58,10 +58,10 @@ public class PortfolioService {
 	 * Updates Portfolio with algo recommendation.
 	 */
 	public void update() {
-		StockStatus[] stocks = getPortfolio().getStocksStatus();
+		StockStatus[] stocks = getPortfolio().getStocks();
 		List<String> symbols = new ArrayList<>(Portfolio.SIZE);
 		for (StockStatus stockStatus : stocks) {
-			symbols.add(stockStatus.getStockSymbol());
+			symbols.add(stockStatus.getSymbol());
 		}
 		
 		List<StockStatus> update = new ArrayList<>(Portfolio.SIZE);
@@ -92,7 +92,7 @@ public class PortfolioService {
 			Stock stock = stocks[i];
 			
 			if(stock != null) {
-				List<StockStatus> history = datastoreService.getStockHistory(stock.getStockSymbol(), DAYS_BACK);
+				List<StockStatus> history = datastoreService.getStockHistory(stock.getSymbol(), DAYS_BACK);
 				
 				for (int j = 0; j < history.size(); j++) {
 					StockStatus curr = history.get(j);
@@ -166,12 +166,12 @@ public class PortfolioService {
 		flush();
 	}
 
-	public void sellStock(String symbol, int quantity) throws StockNotExistsException, IllegalQuantityException {
+	public void sellStock(String symbol, int quantity) throws StockNotExistsException, IllegalQuantityException, BalanceException {
 		getPortfolio().sellStock(symbol, quantity);
 		flush();
 	}
 
-	public void removeStock(String symbol) throws StockNotExistsException, IllegalQuantityException {
+	public void removeStock(String symbol) throws StockNotExistsException, IllegalQuantityException, BalanceException {
 		getPortfolio().removeStock(symbol);
 		flush();
 	}

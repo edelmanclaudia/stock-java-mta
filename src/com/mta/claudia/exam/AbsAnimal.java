@@ -7,35 +7,10 @@ public abstract class AbsAnimal implements Animal{
 	protected int age;
 	protected float weight;
 	
-	//getters
-	public String getName(){
-		return this.name;
-	}
-	
-	public int getAge(){
-		return this.age;
-	}
-	
-	public float getWeight(){
-		return this.weight;
-	}
-	
-	//setters
-	public void setName(String name){
-		this.name = name;
-	}
-	
-	public void setAge(int age){
-		this.age = age;
-	}
-	
-	public void setWeight(float weight){
-		this.weight = weight;
-	}
-	
+	//ctor 
 	public AbsAnimal(String name,int age,float weight){
-		this.setName(name);
-		this.setAge(age);
-		this.setWeight(weight);
+		this.name = name;
+		this.age = age;
+		this.weight = weight;
 	}
 }

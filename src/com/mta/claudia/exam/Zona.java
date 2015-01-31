@@ -12,4 +12,15 @@ public class Zona extends Song{
 	public int getCargoMax(){
 		return cargoMax;
 	}
+	
+	public static void main(String[] args) {
+		Base b1 = new Base(7.6);
+		Base b2 = new Derived1(5.2, 'a');
+		Base b3 = new Derived2(9.8, 3);
+		
+		b1.foo();
+		b2.foo();
+		b3.foo();
+	}
+
 }
