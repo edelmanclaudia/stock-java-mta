@@ -27,5 +27,10 @@ public class Hen extends AbsAnimal{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public Hen(Hen h){
+		super(h);
+		this.numOfEggs = h.numOfEggs;
+	}
 
 }

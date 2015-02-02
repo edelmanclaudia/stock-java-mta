@@ -12,7 +12,7 @@ public abstract class AbsAnimal implements Animal{
 		this.farmName = newName;
 	}
 	
-	public abstract void f();
+	abstract protected void f();
 
 	//ctor 
 	public AbsAnimal(String name,int age,float weight,String farmName){
@@ -31,5 +31,9 @@ public abstract class AbsAnimal implements Animal{
 
 	public AbsAnimal() {
 		
+	}
+	
+	public AbsAnimal(AbsAnimal a){
+		this(a.name,a.age,a.weight);
 	}
 }
