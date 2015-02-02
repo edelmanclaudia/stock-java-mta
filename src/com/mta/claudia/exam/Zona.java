@@ -21,6 +21,13 @@ public class Zona extends Song{
 		b1.foo();
 		b2.foo();
 		b3.foo();
+		
+		System.out.println("is"+5+4);
+		System.out.println(5+4);
+		System.out.println(5+4+"to");
+		System.out.println(+5+4);
+
+		
 	}
 
 }

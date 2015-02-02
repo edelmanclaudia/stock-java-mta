@@ -9,13 +9,17 @@ public class Farm {
 	static AbsAnimal[] animalArray = new AbsAnimal[SIZE];
 
 	public static void createAnArrayOfAnimal(){
+		animalArray[0] = new Cow();
+		System.out.println("Name: " + animalArray[0].name + " ,Age: " + animalArray[0].age + " ,FarmName: " + animalArray[0].farmName);
 
-		animalArray[0] = new Cow("milka",2,2,2);
+	//	animalArray[0] = new Cow("milka",2,2,2);
 		animalArray[1] = new Dog ("jo",2,2);
 		animalArray[2] = new Hen ("kity",2,2,2);
 		animalArray[3] = new Sheep ("doly",2,2,2);
-		animalArray[4] = new Cow("loly",2,2,2);
+		animalArray[4] = new Cow("loly",2,2,2,"Clauds farm");
 
+		animalArray[0].renameFarmName("clauds");
+		
 		print(animalArray);
 
 	}
@@ -23,7 +27,7 @@ public class Farm {
 	public static void print(AbsAnimal []animalArray){
 		for(int i = 0; i < SIZE; i++)
 		{
-			System.out.println("Name: " + animalArray[i].name + " ,Age: " + animalArray[i].age);
+			System.out.println("Name: " + animalArray[i].name + " ,Age: " + animalArray[i].age + " ,FarmName: " + animalArray[i].farmName);
 
 			animalArray[i].walk();
 		}
