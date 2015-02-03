@@ -30,7 +30,7 @@ public class PortfolioEditServlet extends AbstractAlgoServlet {
 		resp.setContentType("application/json");
 
 		Portfolio portfolio = portfolioService.getPortfolio();
-		StockStatus[] stockStatusArray = portfolio.getStocksStatus();
+		StockStatus[] stockStatusArray = portfolio.getStocks();
 		List<StockStatus> stockStatusList = new ArrayList<>();
 		for (StockStatus ss : stockStatusArray) {
 			if(ss != null)
@@ -41,7 +41,6 @@ public class PortfolioEditServlet extends AbstractAlgoServlet {
 		ret.setTitle(portfolio.getTitle());
 		ret.setBalance(portfolio.getBalance());
 		ret.setStockStatusList(stockStatusList);
-
 		resp.getWriter().print(withNullObjects().toJson(ret));
 	}
 

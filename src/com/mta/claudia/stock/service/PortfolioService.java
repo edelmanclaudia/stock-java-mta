@@ -20,6 +20,7 @@ import com.mta.claudia.stock.model.Portfolio;
 import com.mta.claudia.stock.model.Stock;
 import com.mta.claudia.stock.model.StockStatus;
 
+
 /**
  * @author hanan.gitliz@gmail.com
  */
@@ -87,7 +88,7 @@ public class PortfolioService {
 		Map<Date, Float> map = new HashMap<>();
 		
 		//get stock status from db.
-		Stock[] stocks = portfolio.getStocksStatus();
+		Stock[] stocks = portfolio.getStocks();
 		for (int i = 0; i < stocks.length; i++) {
 			Stock stock = stocks[i];
 			
@@ -161,7 +162,7 @@ public class PortfolioService {
 		}
 	}
 	
-	public void buyStock(String symbol, int quantity) throws BalanceException, StockNotExistsException {
+	public void buyStock(String symbol, int quantity) throws BalanceException, StockNotExistsException, IllegalQuantityException {
 		getPortfolio().buyStock(symbol, quantity);
 		flush();
 	}

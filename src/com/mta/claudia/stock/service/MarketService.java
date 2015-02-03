@@ -23,6 +23,7 @@ import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
+
 /**
  * Handles all network streaming aspects.
  *
@@ -233,7 +234,7 @@ public class MarketService {
 	private Stock fromJson(JSONObject stockJson) {
 		try {
 			Stock ret = new Stock();
-			ret.setStockSymbol(stockJson.getString("Symbol"));
+			ret.setSymbol(stockJson.getString("Symbol"));
 			if(!stockJson.isNull("LastTradePriceOnly")) ret.setAsk((float) stockJson.getDouble("LastTradePriceOnly"));
 			if(!stockJson.isNull("Bid")) ret.setBid((float) stockJson.getDouble("Bid"));
 			

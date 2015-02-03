@@ -34,7 +34,7 @@ public class Stock {
 	public Stock(String stockSymbol, float ask, float bid, Date date) {
 		if(stockSymbol != null)
 		{
-			setStockSymbol(stockSymbol);
+			setSymbol(stockSymbol);
 			setAsk(ask);
 			setBid(bid);
 			setDate(date);
@@ -72,7 +72,7 @@ public class Stock {
 
 
 	//setters:
-	public void setStockSymbol (String symbol){
+	public void setSymbol (String symbol){
 		this.symbol = symbol;
 	}
 
