@@ -16,8 +16,8 @@ import com.mta.claudia.stock.exception.StockNotExistsException;
 
 public class Portfolio {
 	public final static int SIZE = 5;
-	public static enum ALGO_RECOMMENDATION{DO_NOTHING,BUY,SELL};
-
+	public static enum ALGO_RECOMMENDATION{DO_NOTHING,BUY,SELL}
+	
 	private String title;
 	private StockStatus[] stocksStatus;
 	private int portfolioSize = 0; 
